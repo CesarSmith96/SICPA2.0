@@ -164,6 +164,7 @@ Route::controllers([
     'validado/guiaremisionemitida'=>'GuiaRemisionEmitidaController',
     'validado/detalleguiaremisionemitida'=>'DetalleGuiaRemisionEmitidaController',
 	'validado/pago'=>'PagoController',
+    'validado/pagop'=>'PagoProveedorController',
 	'validado/caja'=>'CajaController',
 	'validado/reporte'=>'ReporteController',
 	'validado/ocompra'=>'OCompraController',

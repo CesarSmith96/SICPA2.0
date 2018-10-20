@@ -11,6 +11,7 @@ use SICPA\Inventario;
 use SICPA\Conversion;
 use SICPA\Vendedor;
 use SICPA\NotaCredito;
+use SICPA\PagoProveedor;
 use Illuminate\Http\Request;
 use SICPA\Http\Requests\CrearComprobanteRequest;
 use SICPA\Http\Requests\EditarComprobanteRequest;
@@ -341,6 +342,41 @@ class IngresoController extends Controller {
 			$comprobante->comp_doc=$nombre;
 		}
 
+		$comprobante->save();
+
+		if($request->get('cambio')=="SI")
+		{
+		
+			$comprobante->pagos()->delete();
+			
+			$nro_filas = strtoupper($request->get('nro_filas'));
+			
+			for ($i=1; $i < $nro_filas ; $i++) { 
+				$pagop_fecha=$request->get('pagop_fecha'.$i);
+				$pagop_banco=$request->get('pagop_banco'.$i);
+				$pagop_nope=$request->get('pagop_nope'.$i);
+				$pagop_tipcambio=$request->get('pagop_tipcambio'.$i);
+				$pagop_monto=$request->get('pagop_monto'.$i);
+
+				PagoProveedor::create
+				(
+					[
+						'pagop_fecha' => $pagop_fecha,
+						'pagop_monto' => $pagop_monto,
+						'pagop_banco' => $pagop_banco,
+						'pagop_nope' => $pagop_nope,
+						'pagop_tipcambio' => $pagop_tipcambio,
+						'comp_id' => $comp_id
+					]
+				);
+			}
+		}
+		
+		$tot_pago = PagoProveedor::where('comp_id',$comp_id)->sum('pagop_monto');
+
+		$comprobante->comp_saldo=$comprobante->comp_tot - $tot_pago;
+		// if($comprobante->comp_saldo==0 && $comprobante->comp_cond=="AL CREDITO" || "AL CONTADO")
+		// 	$comprobante->comp_cond="CANCELADO";
 		$comprobante->save();
 
 		return redirect('/validado/ingreso')->with('actualizado','Comprobante actualizado');

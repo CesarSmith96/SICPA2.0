@@ -42,6 +42,9 @@ class Comprobante extends Model {
 	public function pagos(){
 		return $this->hasMany('SICPA\Pago','comp_id');
 	}
+	public function pagoproveedores(){
+		return $this->hasMany('SICPA\PagoProveedor','comp_id');
+	}
 	public function vendedor(){
 		return $this->belongsTo('SICPA\Vendedor','vend_id');
 	}
