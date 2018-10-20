@@ -44,13 +44,9 @@
 						<td  align='center'><strong>{{number_format($comprobante->comp_igv,2,'.',',')}}</strong></td>
 						<td  align='center'><strong>{{number_format($comprobante->comp_tot,2,'.',',')}}</strong></td>
 						<td  align='center'><strong>{{number_format($comprobante->comp_saldo,2,'.',',')}}</strong></td>
-						@if($comprobante->comp_saldo=='0.00')
-							<td align="center"><strong>CANCELADO</strong></td>
-							@else
-								<td align="center"><strong>{{$comprobante->comp_est}}</strong></td>
-							@endif
+						<td align="center"><strong>{{$comprobante->comp_est}}</strong></td>	
 						<td  align='center'><strong>{{$comprobante->comp_cond}}</strong></td>
-						@if($comprobante->comp_cond=='AL CONTADO')
+						@if($comprobante->comp_cond=='AL CONTADO' || $comprobante->comp_saldo=='0.00')
 							<td align='center'><strong>PAGADO</strong></td>
 							@else
 								<td align='center'><strong>POR PAGAR</strong></td>

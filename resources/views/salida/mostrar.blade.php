@@ -250,13 +250,11 @@
 							<td><div style="display:inline; float:right">{{number_format($comprobante->comp_igv,2,'.',',')}}</div></td>
 							<td><div style="display:inline; float:right">{{number_format($comprobante->comp_tot,2,'.',',')}}</div></td>
 							<td><div style="display:inline; float:right">{{number_format($comprobante->comp_saldo,2,'.',',')}}</div></td>
-							@if($comprobante->comp_saldo=='0.00')
-							<td>CANCELADO</td>
-							@else
-								<td>{{$comprobante->comp_est}}</td>
-							@endif
+							
+							<td>{{$comprobante->comp_est}}</td>
+							
 							<td>{{$comprobante->comp_cond}}</td>
-							@if($comprobante->comp_cond=='AL CONTADO')
+							@if($comprobante->comp_cond=='AL CONTADO' || $comprobante->comp_saldo=='0.00')
 							<td>PAGADO</td>
 							@else
 								<td>POR PAGAR</td>
