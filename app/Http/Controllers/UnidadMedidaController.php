@@ -34,8 +34,9 @@ class UnidadMedidaController extends Controller {
 	 */
 	public function getIndex()
 	{
+		$unidades = Unidad::all();
 		$unidadmedidas = UnidadMedida::all();
-		return view('unidadmedida.mostrar',['unidadmedidas'=> $unidadmedidas]);
+		return view('unidadmedida.mostrar',['unidadmedidas'=> $unidadmedidas, 'unidades'=> $unidades]);
 	}
 
 	public function getCrear()
@@ -65,8 +66,7 @@ class UnidadMedidaController extends Controller {
 		$unidadmedida = UnidadMedida::find($um_id);
 		$unidades = Unidad::all();
 
-		return view('unidadmedida.editar',['unidadmedida'=>$unidadmedida,'unidades'=> $unidades]);
-
+		return $unidadmedida;
 	}
 
 	public function postEditar(Request $request)

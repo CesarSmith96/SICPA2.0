@@ -38,15 +38,19 @@ class CategoriaController extends Controller {
 	public function getIndex()
 	{
 		$categorias = Categoria::orderBy('fam_id','asc')->get();
-		return view('categoria.mostrar',['categorias'=> $categorias]);
+		$familias =Familia::orderBy('fam_desc','asc')->get();
+		if(Familia::count()==0)
+			return redirect('/validado/categoria')->with('error','No existen Familias, debe crear por lo menos una.');
+		return view('categoria.mostrar',['familias'=>$familias,'categorias'=> $categorias]);
 	}
 
 	public function getCrear()
 	{
+		$categorias = Categoria::orderBy('fam_id','asc')->get();
 		$familias =Familia::orderBy('fam_desc','asc')->get();
 		if(Familia::count()==0)
 			return redirect('/validado/categoria')->with('error','No existen Familias, debe crear por lo menos una.');
-		return view('categoria.crear',['familias'=>$familias]);
+		return view('categoria.mostrar',['familias'=>$familias,'categorias'=> $categorias]);
 	}
 
 	public function postCrear(Request $request)
@@ -71,7 +75,7 @@ class CategoriaController extends Controller {
 		$familias =Familia::orderBy('fam_desc','asc')->get();
 
 
-		return view('categoria.editar',['categoria'=>$categoria,'familias'=>$familias]);
+		return $categoria;
 	}
 
 	public function postEditar(Request $request)

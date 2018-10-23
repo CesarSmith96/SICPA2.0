@@ -34,8 +34,9 @@ class ConversionController extends Controller {
 	 */
 	public function getIndex()
 	{
+		$unidadmedidas = UnidadMedida::all();
 		$conversiones = Conversion::orderBy('um_id1','asc')->get();;
-		return view('conversion.mostrar',['conversiones'=> $conversiones]);
+		return view('conversion.mostrar',['conversiones'=> $conversiones, 'unidadmedidas'=>$unidadmedidas]);
 	}
 
 	public function getCrear()
@@ -75,7 +76,7 @@ class ConversionController extends Controller {
 		$conversion = Conversion::find($conv_id);
 		$unidadmedidas = UnidadMedida::all();
 
-		return view('conversion.editar',['conversion'=>$conversion],['unidadmedidas'=>$unidadmedidas]);
+		return $conversion;
 	}
 
 	public function postEditar(Request $request)

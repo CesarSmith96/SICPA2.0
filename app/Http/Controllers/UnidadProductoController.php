@@ -36,8 +36,10 @@ class UnidadProductoController extends Controller {
 	 */
 	public function getIndex()
 	{
+		$productos = Producto::orderBy('prod_desc','asc')->get();
+		$unidadmedidas = UnidadMedida::orderBy('um_desc','asc')->get();
 		$unidadproductos = UnidadProducto::join('t_producto','t_producto.prod_id','=','t_unidadproducto.prod_id')->select('t_unidadproducto.*')->orderBy('t_producto.prod_desc')->get();
-		return view('unidadproducto.mostrar',['unidadproductos'=> $unidadproductos]);
+		return view('unidadproducto.mostrar',['unidadproductos'=> $unidadproductos, 'productos'=>$productos,'unidadmedidas'=>$unidadmedidas]);
 	}
 
 	public function getCrear()
