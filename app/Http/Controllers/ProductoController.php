@@ -147,7 +147,7 @@ class ProductoController extends Controller {
 	{
 		$categorias =Categoria::orderBy('cat_desc','asc')->get();
 		$unidadmedidas =UnidadMedida::orderBy('um_desc','asc')->get();
-		$entidad =Entidad::orderBy('ent_rz','asc')->get();
+		$entidad = Entidad::where('tent_id','2')->orderBy('ent_rz','asc')->get();
 
 		return view('producto.crear',['categorias'=>$categorias],['unidadmedidas'=>$unidadmedidas,'entidad'=>$entidad]);
 	}

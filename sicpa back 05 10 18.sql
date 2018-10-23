@@ -25812,7 +25812,20 @@ INSERT INTO `t_ordencv` (`ocv_id`, `ocv_nro`, `ocv_fecha`, `ocv_est`, `ocv_subt`
 (2, '2', '2017-11-15', 'ACTIVO', '468.00', '0.00', '468.00', '-', '0.000', 'DOLAR', 'NPEDIDO', '', 'CUSCO', '', '', '', '', '0000-00-00', '0000-00-00', 358, 5, '', '', '1234', '', '', 'BCP', '', '', '2345.00', '0.00', '0.00', '2017-11-15 21:06:24', '2017-11-15 21:07:06');
 
 -- --------------------------------------------------------
-
+--
+-- Estructura de tabla para la tabla `t_pagoproveedor`
+--
+CREATE TABLE `t_pagoproveedor` (
+  `pagop_id` int(10) UNSIGNED NOT NULL,
+  `pagop_fecha` date NOT NULL,
+  `pagop_monto` decimal(8,2) NOT NULL,
+  `pagop_banco` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pagop_nope` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pagop_tipcambio` decimal(12,2) NOT NULL,
+  `comp_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 --
 -- Estructura de tabla para la tabla `t_pago`
 --
@@ -27207,7 +27220,7 @@ ALTER TABLE `t_adicionalguia`
   ADD KEY `t_adicionalguia_dist_idlleg_foreign` (`dist_idlleg`);
 
 --
--- Indices de la tabla `t_almacen`
+-- Indices de la tabla `t_almacen`t_com
 --
 ALTER TABLE `t_almacen`
   ADD PRIMARY KEY (`alm_id`);
@@ -27338,7 +27351,12 @@ ALTER TABLE `t_ordencv`
   ADD PRIMARY KEY (`ocv_id`),
   ADD KEY `t_ordencv_ent_id_foreign` (`ent_id`),
   ADD KEY `t_ordencv_vend_id_foreign` (`vend_id`);
-
+--
+-- Indices de la tabla `t_pagoproveedor`
+--
+ALTER TABLE `t_pagoproveedor`
+  ADD PRIMARY KEY (`pagop_id`),
+  ADD KEY `t_pagoproveedor_comp_id_foreign` (`comp_id`);
 --
 -- Indices de la tabla `t_pago`
 --
@@ -27359,7 +27377,7 @@ ALTER TABLE `t_precioventa`
 ALTER TABLE `t_producto`
   ADD PRIMARY KEY (`prod_id`),
   ADD KEY `t_producto_cat_id_foreign` (`cat_id`),
-  ADD KEY `t_producto_um_id_foreign` (`um_id`);
+  ADD KEY `t_producto_um_id_foreign` (`um_id`),
   ADD KEY `t_producto_ent_id_foreign` (`ent_id`);
 
 --
@@ -27538,6 +27556,12 @@ ALTER TABLE `t_operacion`
 --
 ALTER TABLE `t_ordencv`
   MODIFY `ocv_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `t_pagoproveedor`
+--
+ALTER TABLE `t_pagoproveedor`
+  MODIFY `pagop_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=406;
+--
 --
 -- AUTO_INCREMENT de la tabla `t_pago`
 --
@@ -27725,7 +27749,11 @@ ALTER TABLE `t_operacion`
 ALTER TABLE `t_ordencv`
   ADD CONSTRAINT `t_ordencv_ent_id_foreign` FOREIGN KEY (`ent_id`) REFERENCES `t_entidad` (`ent_id`),
   ADD CONSTRAINT `t_ordencv_vend_id_foreign` FOREIGN KEY (`vend_id`) REFERENCES `t_vendedor` (`vend_id`);
-
+--
+-- Filtros para la tabla `t_pagoproveedor`
+--
+ALTER TABLE `t_pagoproveedor`
+  ADD CONSTRAINT `t_pagoproveedor_comp_id_foreign` FOREIGN KEY (`comp_id`) REFERENCES `t_comprobante` (`comp_id`);
 --
 -- Filtros para la tabla `t_pago`
 --
@@ -27743,7 +27771,7 @@ ALTER TABLE `t_precioventa`
 --
 ALTER TABLE `t_producto`
   ADD CONSTRAINT `t_producto_cat_id_foreign` FOREIGN KEY (`cat_id`) REFERENCES `t_categoria` (`cat_id`),
-  ADD CONSTRAINT `t_producto_um_id_foreign` FOREIGN KEY (`um_id`) REFERENCES `t_unidadmedida` (`um_id`);
+  ADD CONSTRAINT `t_producto_um_id_foreign` FOREIGN KEY (`um_id`) REFERENCES `t_unidadmedida` (`um_id`),
   ADD CONSTRAINT `t_producto_ent_id_foreign` FOREIGN KEY (`ent_id`) REFERENCES `t_entidad` (`ent_id`);
 
 --

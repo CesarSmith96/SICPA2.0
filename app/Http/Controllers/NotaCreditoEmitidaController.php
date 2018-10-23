@@ -117,16 +117,20 @@ class NotaCreditoEmitidaController extends Controller {
 		return view('notacreditoemitida.mostrar',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 	}
 
-	public function getCrear()
+	public function getCrear(Request $request)
 	{
+		$comp_id=$request->get('comp_id');
+		$comprobante = Comprobante::find($comp_id);
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get(); // tipo cliente
 		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
-		return view('notacreditoemitida.crear',['tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
+		return view('notacreditoemitida.crear',['tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores,'comprobante'=>$comprobante]);
+		return $comp_id;
 	}
 
 	public function postCrear(CrearNotaCreditoEmitidaRequest $request)
 	{
+
 		$tcompinc_id = strtoupper($request->get('tcompinc_id'));
 		$comp_ref_id = strtoupper($request->get('comp_ref_id'));
 		$comp_referencia= Comprobante::find($comp_ref_id);
@@ -155,7 +159,7 @@ class NotaCreditoEmitidaController extends Controller {
 				//'comp_banco' => strtoupper($request->get('comp_banco')),
 				//'comp_nope' => strtoupper($request->get('comp_nope')),
 				//'comp_np' => strtoupper($request->get('comp_np')),
-				'comp_desc' => strtoupper($request->get('comp_desc')),
+				'comp_descrip' => ($request->get('comp_descrip')),
 				'comp_ref' => $comp_ref_id,
 				'comp_obs' => strtoupper($request->get('comp_obs')),
 				'comp_fven' => strtoupper($request->get('comp_fven')),
@@ -170,6 +174,17 @@ class NotaCreditoEmitidaController extends Controller {
 			$comprobante->comp_fven=$request->get('comp_fven');
 			$comprobante->save();
 		}*/
+		$comprobante=Comprobante::find($comp_id);
+
+		$file = $request->file('comp_doc');
+		if($file)
+		{
+			$ruta='\img';
+			$nombre= $comp_id.'.'.$file->guessExtension();
+			$file->move(getcwd().$ruta,$nombre);
+			$comprobante->comp_doc=$nombre;
+			$comprobante->save();
+		}	
 
 		Operacion::create
 		(
@@ -309,7 +324,7 @@ class NotaCreditoEmitidaController extends Controller {
 		$ent_id = $comp_referencia->entidad->ent_id;		
 		$vend_id = strtoupper($request->get('vend_id'));
 		$comp_obs = strtoupper($request->get('comp_obs'));
-		$comp_desc = strtoupper($request->get('comp_desc'));
+		$comp_descrip = strtoupper($request->get('comp_descrip'));
 		$comp_ref = $comp_ref_id;
 		$comp_fven = strtoupper($request->get('comp_fven'));
 		$comprobante = Comprobante::find($comp_id);
@@ -324,10 +339,19 @@ class NotaCreditoEmitidaController extends Controller {
 		$comprobante->ent_id=$ent_id;
 		$comprobante->vend_id=$vend_id;
 		$comprobante->comp_obs=$comp_obs;
-		$comprobante->comp_desc=$comp_desc;
+		$comprobante->comp_descrip=$comp_descrip;
 		$comprobante->comp_ref=$comp_ref;
 		$comprobante->comp_fven=$comp_fven;
 		
+		$file = $request->file('comp_doc');
+		if($file)
+		{
+			$ruta='\img';
+			$nombre= $comp_id.'.'.$file->guessExtension();
+			$file->move(getcwd().$ruta,$nombre);
+			$comprobante->comp_doc=$nombre;
+		}
+
 		$comprobante->save();
 
 		return redirect('/validado/notacreditoemitida')->with('actualizado','Comprobante actualizado');

@@ -26,6 +26,7 @@ class CrearNotaCreditoEmitidaRequest extends Request {
 			'comp_fecha' =>'required',
 			'comp_est' =>'required',
 			'comp_subt' =>'required',
+			'comp_descrip' =>'required',
 			'comp_igv' =>'required',
 			'comp_tot' =>'required',
 			'comp_saldo' =>'required',

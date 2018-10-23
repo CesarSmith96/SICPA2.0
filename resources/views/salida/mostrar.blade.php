@@ -283,7 +283,7 @@
 							@endif-->
 							@if($comprobante->comp_est!='ANULADO')
 								<a href="/validado/salida/sanular?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular?')"><img src="/images/anular.png" title="ANULAR"></a>
-								<a href="/validado/notacredito/crearncemitida?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular con NOTA DE CRÉDITO?')"><img src="/images/nc.png" title="ANULAR CON NOTA DE CRÉDITO"></a>
+								<a href="/validado/notacreditoemitida/crear?comp_id={{$comprobante->comp_id}}""><img src="/images/nc.png" title="ANULAR CON NOTA DE CRÉDITO"></a>
 							@endif
 							</td>
 						</tr>

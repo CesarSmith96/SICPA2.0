@@ -182,10 +182,10 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/validado/notacreditoemitida/crear">
+					<form class="form-horizontal" role="form" method="POST" action="/validado/notacreditoemitida/crear" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="comp_est" value="ACTIVO" >
-						<input type="hidden" name="comp_ref_id" id="comp_ref_id" value="" >
+						<input type="hidden" name="comp_ref_id" id="comp_ref_id" value='{{$comprobante->comp_id}}' >
 						<input type="hidden" name="tcomp_id" value="3"  > <!-- 3 es nota de credito-->
 						<div class="form-group">
 							<label class="col-md-4 control-label">Nro</label>
@@ -207,25 +207,25 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Descripción</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control text-uppercase" name="comp_descrip" value="{{ old('comp_descrip') }}">
+								<input type="text" class="form-control text-uppercase" name="comp_descrip" id="comp_descrip" value="{{$comprobante->comp_descrip}}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label">Nro</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control text-uppercase" name="comp_ref" id="comp_ref"  value="{{ old('comp_ref') }}">
+								<input type="text" class="form-control text-uppercase" name="comp_ref" id="comp_ref"  value="{{$comprobante->comp_nro}}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label">Cliente</label>
 							<div class="col-md-6">
-								<input type="text" disabled="" class="form-control text-uppercase" name="ent_rz" id="ent_rz">
+								<input type="text" disabled="" class="form-control text-uppercase" name="ent_rz" id="ent_rz" value="{{$comprobante->entidad->ent_rz}}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label">Tipo Comprobante</label>
 							<div class="col-md-6">
-								<input type="text" disabled="" class="form-control text-uppercase" name="tcomp_desc" id="tcomp_desc">
+								<input type="text" disabled="" class="form-control text-uppercase" name="tcomp_desc" id="tcomp_desc" value="{{$comprobante->tipocomprobante->tcomp_desc}}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -253,13 +253,13 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Moneda</label>
 							<div class="col-md-6">
-								<input type="text" disabled="" class="form-control text-uppercase" name="comp_moneda" id="comp_moneda">
+								<input type="text" disabled="" class="form-control text-uppercase" name="comp_moneda" id="comp_moneda" value="{{$comprobante->comp_moneda}}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label">Tipo de Cambio</label>
 							<div class="col-md-2">
-								<input type="text" disabled="" class="form-control text-uppercase" name="comp_tipcambio" id="comp_tipcambio">
+								<input type="text" disabled="" class="form-control text-uppercase" name="comp_tipcambio" id="comp_tipcambio" value="{{$comprobante->comp_tipcambio}}">
 							</div>
 						</div>
 						<div class="form-group">

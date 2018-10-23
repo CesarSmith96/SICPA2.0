@@ -68,6 +68,7 @@
 								<li><a href="/validado/notacreditorecibida">Notas de Credito Recibidas</a></li>
 								<li><a href="/validado/guiaremisionemitida">Guías de Remisión Emitidas</a></li>
 								<li><a href="/validado/npedido">Nota de Pedido</a></li>
+								<li><a href="/validado/ndebito">Nota de Debito</a></li>
 								<li><a href="/validado/salidaexterno">Gastos</a></li>
 								<li><a href="/validado/notacredito">Notas de Credito</a></li>
 								<li><a href="/validado/caja">Caja</a></li>

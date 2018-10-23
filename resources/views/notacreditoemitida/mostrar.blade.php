@@ -186,8 +186,7 @@
 			<div class="panel-heading">Notas de Crédito</div>
 
 			<div class="panel-body">
-				<a href="/validado/notacreditoemitida/crear" class="btn btn-success" role="button">Nueva Nota de Crédito</a>
-				<br/><br/>
+				
 				<table class="table">
 						<tr>
 							<th>Nro.</th>
@@ -220,6 +219,8 @@
 
 							<a href="/validado/detallenotacreditoemitida?comp_id={{$comprobante->comp_id}}"><img src="/images/detalle.png"  title="VER DETALLE"></a>
 							<a href="/validado/notacreditoemitida/editar?comp_id={{$comprobante->comp_id}}"><img src="/images/editar.png" title="EDITAR"></a>
+							<a target="_blank" href="/img/{{$comprobante->comp_doc}}"><img src="/images/pdf.png" title="VER ARCHIVO"></a>
+							
 							<a href="/validado/notacreditoemitida/eliminar?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
 							
 							</td>
