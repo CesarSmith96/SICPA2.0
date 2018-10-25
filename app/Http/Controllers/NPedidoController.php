@@ -87,6 +87,8 @@ class NPedidoController extends Controller {
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->get(); // tipo CLIENTE
 
 		if(Input::get('imprimir'))
+		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->get(); 
+		$ordencvs = OrdenCV::where('ocv_tipo','NPEDIDO')->get();
 			return view('reporte.npedido',['ordencvs'=> $ordencvs,'entidades'=> $entidades]);
 		return view('npedido.mostrar',['ordencvs'=> $ordencvs,'entidades'=> $entidades]);
 		

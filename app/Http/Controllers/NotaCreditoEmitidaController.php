@@ -113,7 +113,8 @@ class NotaCreditoEmitidaController extends Controller {
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
 
 		if(Input::get('imprimir'))
-			return view('reporte.ingresoexcel',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
+			$comprobantes=Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','5')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
+			return view('reporte.notacreditoemitida',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 		return view('notacreditoemitida.mostrar',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 	}
 
