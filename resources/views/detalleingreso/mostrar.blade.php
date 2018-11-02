@@ -1,5 +1,22 @@
-@extends('app')
+@extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
 
+</style>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+</script>
+<script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
+<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+@endsection
 @section('content')
 @if (Session::has('error'))
 	<div class="alert alert-danger">
@@ -22,13 +39,20 @@
 	</div>
 @endif
 
-<div class="container-fluid">
-	<div class="col-md-8 col-md-offset-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">Comprobante</div>
+<div class="content">
+	<div class="col-md-9 col-centered">
+		<div class="card border-success-400">
+			<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Comprobante</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                	</div>
+	            	</div>
+				</div>
 
-			<div class="panel-body">
-				<table class="table">
+			<div class="card-body">
+				<table class="table table-bordered table-hover datatable-basic table-xs">
 					<tr>
 						<th>Nro.</th>
 						<th>Tipo</th>
@@ -55,13 +79,14 @@
 		</div>
 	</div>
 
-	<div class="col-md-8 col-md-offset-2">
-		<div class="panel panel-default">
-			<div class="panel-body">
+	<div class="col-md-9 col-centered">
+		<div class="card border-success-400">
+			<div class="card-body">
 				<a href="/validado/detalleingreso/crear?comp_id={{$comprobante->comp_id}}" class="btn btn-success" role="button">+</a>
 				<br/><br/>
 
-				<table class="table">
+				<table class="table table-bordered table-hover datatable-basic table-xs">
+					<thead>
 						<tr>
 							<th>Cantidad</th>
 							<th>Unidad</th>
@@ -70,6 +95,7 @@
 							<th width="130">Precio Total</th>
 							<th>Acciones</th>
 						</tr>
+					</thead>
 				
 				@if(sizeof($detallecomprobantes)>0)
 					
@@ -81,8 +107,12 @@
 							<td>{{$detallecomprobante->unidadproducto->producto->prod_desc}}</td>
 							<td><div style="display:inline; float:left">{{$moneda}}</div><div style="display:inline; float:right">{{number_format($detallecomprobante->dcomp_prec,2,'.',',')}}</div></td>
 							<td><div style="display:inline; float:left">{{$moneda}}</div><div style="display:inline; float:right">{{number_format($detallecomprobante->dcomp_cant*$detallecomprobante->dcomp_prec,2,'.',',')}}</div></td>
-							<td>
-							<a href="/validado/detalleingreso/eliminar?dcomp_id={{$detallecomprobante->dcomp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger">Eliminar</a>
+							<td class="text-center">
+								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
+								<div class='dropdown-menu dropdown-menu-right'>
+									<a href="/validado/detalleingreso/eliminar?dcomp_id={{$detallecomprobante->dcomp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger dropdown-item"><i class="icon-cancel-square2"></i>Eliminar</a>
+								</div>
+							</td>
 						</tr>
 					@endforeach
 					
@@ -93,12 +123,12 @@
 				@endif
 
 				</table>
+			</div>
 
+			<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
+				<a href="/validado/ingreso" class="btn bg-transparent text-white border-white border-2">Regresar</a>
 			</div>
 		</div>
-
-		<a href="/validado/ingreso" class="btn btn-danger" role="button">Regresar</a>
-		
 	</div>
 </div>
 @endsection

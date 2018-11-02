@@ -1,30 +1,18 @@
-@extends('app')
+@extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
 
-@section('content')
-@if (Session::has('error'))
-	<div class="alert alert-danger">
-		<strong>{{Session::get('error')}}</strong>
-	</div>
-@endif
-@if (Session::has('creado'))
-	<div class="alert alert-success">
-		{{Session::get('creado')}}
-	</div>
-@endif
-@if (Session::has('actualizado'))
-	<div class="alert alert-success">
-		{{Session::get('actualizado')}}
-	</div>
-@endif
-@if (Session::has('eliminado'))
-	<div class="alert alert-success">
-		{{Session::get('eliminado')}}
-	</div>
-@endif
-
+</style>
+@endsection
+@section('javascript')
 <script type="text/javascript">
-
-	
 
 	function borrarColumna()
 	{
@@ -49,19 +37,47 @@
 		}
 		
 	}
-
-
-
 </script>
-
+<script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
+<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+@endsection
+@section('content')
+@if (Session::has('error'))
+	<div class="alert alert-danger">
+		<strong>{{Session::get('error')}}</strong>
+	</div>
+@endif
+@if (Session::has('creado'))
+	<div class="alert alert-success">
+		{{Session::get('creado')}}
+	</div>
+@endif
+@if (Session::has('actualizado'))
+	<div class="alert alert-success">
+		{{Session::get('actualizado')}}
+	</div>
+@endif
+@if (Session::has('eliminado'))
+	<div class="alert alert-success">
+		{{Session::get('eliminado')}}
+	</div>
+@endif
 <body onload="deshabilitar()">
-<div class="container-fluid">
-	<div class="col-md-8 col-md-offset-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">Comprobante</div>
+<div class="content">
+	<div class="col-md-8 col-centered">
+			<div class="card border-success-400">
+			<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Comprobante</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                		<a class="list-icons-item" data-action="remove"></a>
+	                	</div>
+	            	</div>
+				</div>
 
-			<div class="panel-body">
-				<table class="table">
+			<div class="card-body border-success-400">
+				<table class="table table-bordered table-hover datatable-basic table-xs">
 					<tr>
 						<th>Nro.</th>
 						<th>Tipo</th>
@@ -88,13 +104,14 @@
 		</div>
 	</div>
 
-	<div class="col-md-8 col-md-offset-2">
-		<div class="panel panel-default">
-			<div class="panel-body">
+	<div class="col-md-8 col-centered">
+			<div class="card border-success-400">
+			<div class="card-body border-success-400">
 				<a href="/validado/detallenotacreditoemitida/crear?comp_id={{$comprobante->comp_id}}" id="crear" class="btn btn-success" role="button">+</a>
 				<br/><br/>
 
-				<table id="tabla" class="table">
+				<table id="tabla" class="table table-bordered table-hover datatable-basic table-xs">
+					<thead>
 						<tr>
 							<td><strong>Cantidad</strong></td>
 							<td><strong>Unidad</strong></td>
@@ -103,6 +120,7 @@
 							<td width="130"><strong>Precio Total</strong></td>
 							<td><strong>Acciones</strong></td>
 						</tr>
+					</thead>
 				
 				@if(sizeof($detallecomprobantes)>0)
 					
@@ -114,8 +132,12 @@
 							<td>{{$detallecomprobante->unidadproducto->producto->prod_desc}}</td>
 							<td><div style="display:inline; float:left">{{$moneda}}</div><div style="display:inline; float:right">{{number_format($detallecomprobante->dcomp_prec,2,'.',',')}}</div></td>
 							<td><div style="display:inline; float:left">{{$moneda}}</div><div style="display:inline; float:right">{{number_format($detallecomprobante->dcomp_cant*$detallecomprobante->dcomp_prec,2,'.',',')}}</div></td>
-							<td>
-							<a id="eliminar" href="/validado/detallenotacreditoemitida/eliminar?dcomp_id={{$detallecomprobante->dcomp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger">Eliminar</a></td>
+							<td class="text-center">
+								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
+								<div class='dropdown-menu dropdown-menu-right'>
+								<a id="eliminar" href="/validado/detallenotacreditoemitida/eliminar?dcomp_id={{$detallecomprobante->dcomp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger dropdown-item""><i class="icon-cancel-square2"></i>Eliminar</a>
+								</div>
+							</td>
 						</tr>
 					@endforeach
 					
@@ -128,11 +150,15 @@
 				</table>
 
 			</div>
+			<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
+				<a href="/validado/notacreditoemitida" class="btn bg-transparent text-white border-white border-2">Regresar</a>
+
+				<a href="/validado/detallenotacreditoemitida/generartxt?comp_id={{$comprobante->comp_id}}" class="btn btn-outline bg-white text-white border-white border-2" role="button">Generar Txt <i class="icon-paperplane ml-2"></i></a>
+			</div>
 		</div>
 
 		<!--<a href="/validado/detallesalida/imprimir?comp_id={{$comprobante->comp_id}}" class="btn btn-info" role="button">Imprimir</a>-->
-		<a href="/validado/detallenotacreditoemitida/generartxt?comp_id={{$comprobante->comp_id}}" class="btn btn-info" role="button">Generar Txt</a>
-		<a style="float: right;" href="/validado/notacreditoemitida" class="btn btn-danger" role="button">Regresar</a>
+	
 		
 	</div>
 </div>

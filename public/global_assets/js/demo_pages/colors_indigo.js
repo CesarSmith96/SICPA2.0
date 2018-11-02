@@ -12,7 +12,6 @@
 
 var IndigoPalette = function() {
 
-
     //
     // Setup module components
     //

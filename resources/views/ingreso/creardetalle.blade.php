@@ -1,12 +1,37 @@
-@extends('app')
+@extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
+
+</style>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+</script>
+<script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
+<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+@endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="content">
 	<div class="row">
-		<div class="col-md-12 col-md-offset-0">
-			<div class="panel panel-default">
-				<div class="panel-heading">Nueva Compra</div>
-				<div class="panel-body">
+		<div class="col-md-9 col-centered">
+			<div class="card border-success-400">
+				<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Nueva Compra</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                	</div>
+	            	</div>
+				</div>
+				<div class="card-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> Al parecer algo está mal.<br><br>

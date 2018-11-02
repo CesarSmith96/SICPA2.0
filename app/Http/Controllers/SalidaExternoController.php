@@ -96,6 +96,7 @@ class SalidaExternoController extends Controller {
 		$tipogastos = TipoGasto::orderBy('tgasto_desc','asc')->get();
 
 		if(Input::get('imprimir'))
+			$ieexternos = IEExterno::join('t_operacion','t_operacion.ie_id','=','t_ieexterno.ie_id')->select('t_ieexterno.*')->where('t_operacion.tope_id','=','4')->where('t_ieexterno.ie_id','<>','1')->get();
 			return view('reporte.salidaexterno',['ieexternos'=> $ieexternos,'vendedores'=>$vendedores,'tipoccs'=>$tipoccs,'tipogastos'=>$tipogastos]);
 		return view('salidaexterno.mostrar',['ieexternos'=> $ieexternos,'vendedores'=>$vendedores,'tipoccs'=>$tipoccs,'tipogastos'=>$tipogastos]);
 	}

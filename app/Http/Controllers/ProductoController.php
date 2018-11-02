@@ -46,13 +46,14 @@ class ProductoController extends Controller {
 	public function getIndex()
 	{
 		$productos = Producto::orderBy('prod_desc','asc')->get();
+		$producto = Producto::all();
 
 		$categorias =Categoria::orderBy('cat_desc','asc')->get();
 		$familias =Familia::orderBy('fam_desc','asc')->get();
-		$entidad =Entidad::orderBy('ent_rz','asc')->get();
+		$entidad = Entidad::where('tent_id','2')->orderBy('ent_rz','asc')->get();
 
 		$unidadmedidas =UnidadMedida::orderBy('um_desc','asc')->get();
-		return view('producto.mostrar',['productos'=> $productos,'categorias'=>$categorias,'familias'=>$familias,'unidadmedidas'=>$unidadmedidas,'entidad'=>$entidad]);
+		return view('producto.mostrar',['productos'=> $productos, 'producto'=> $producto, 'categorias'=>$categorias,'familias'=>$familias,'unidadmedidas'=>$unidadmedidas,'entidad'=>$entidad]);
 	}
 
 	public function postIndex(Request $request)
@@ -108,8 +109,12 @@ class ProductoController extends Controller {
 
 
 		if(Input::get('imprimir'))
+
+			$productos = Producto::orderBy('prod_desc','asc')->get();
 			return view('reporte.producto',['productos'=> $productos,'categorias'=>$categorias,'familias'=>$familias,'unidadmedidas'=>$unidadmedidas]);
+
 		if(Input::get('exportarxls'))
+			$productos = Producto::orderBy('prod_desc','asc')->get();
 			return view('reporte.productos',['productos'=> $productos,'categorias'=>$categorias,'familias'=>$familias,'unidadmedidas'=>$unidadmedidas]);
 		
 	}
@@ -191,7 +196,7 @@ class ProductoController extends Controller {
 		$entidad =Entidad::orderBy('ent_rz','asc')->get();
 
 
-		return view('producto.editar',['producto'=>$producto,'categorias'=>$categorias,'unidadmedidas'=>$unidadmedidas,'entidad'=>$entidad]);
+		return $producto;
 	}
 
 	public function postEditar(EditarProductoRequest $request)

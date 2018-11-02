@@ -1,6 +1,23 @@
-@extends('app')
+@extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
 
-<script>
+</style>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+</script>
+<script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
+<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+
+<script type="text/javascript">
     function getUp(sel)
 	{	    
 	    var prod_id = sel.value;
@@ -16,15 +33,22 @@
         });
 	}
 </script>
-
+@endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="content">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Nuevo Detalle</div>
-				<div class="panel-body">
+		<div class="col-md-8 col-centered">
+			<div class="card border-success-400">
+				<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Nuevo Detalle</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                	</div>
+	            	</div>
+				</div>
+				<div class="card-body border-success-400">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> Al parecer algo está mal.<br><br>
@@ -40,14 +64,14 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" class="form-control text-uppercase" name="ocv_id" value='{{$ocv_id}}'>
 						<div class="form-group">
-							<label class="col-md-4 control-label">Cantidad</label>
-							<div class="col-md-6">
+							<label class="control-label">Cantidad</label>
+							<div>
 								<input type="text" class="form-control text-uppercase" name="docv_cant">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-4 control-label">Producto</label>
-							<div class="col-md-6">
+							<label class="control-label">Producto</label>
+							<div>
 								<select class="form-control text-uppercase" id="prod_id" name="prod_id" onchange="getUp(this)">
 									<option value=0>Elija Producto</option>
 									@foreach ($productos as $producto)										
@@ -57,29 +81,26 @@
 							</div>
 						</div>						
 						<div class="form-group">
-							<label class="col-md-4 control-label">Unidad Medida</label>
-							<div class="col-md-6">
+							<label class="control-label">Unidad Medida</label>
+							<div>
 								<select class="form-control text-uppercase" id="um_id" name="um_id">
 									 <option value=0>Elija Unidad</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-4 control-label">Precio Unitario</label>
-							<div class="col-md-6">
+							<label class="control-label">Precio Unitario</label>
+							<div>
 								<input type="text" class="form-control text-uppercase" name="docv_prec">
 							</div>
 						</div>
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Crear
-								</button>
-								<a href="/validado/detallenpedido?ocv_id={{$ocv_id}}" class="btn btn-danger" role="button">Cancelar</a>
-							</div>
-						</div>
-					</form>
 				</div>
+				<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
+				<a href="/validado/detallenpedido?ocv_id={{$ocv_id}}" class="btn bg-transparent text-white border-white border-2">Cancelar</a>
+
+				<button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Crear<i class="icon-paperplane ml-2"></i></button>
+				</div>
+				</form>
 			</div>
 		</div>
 	</div>

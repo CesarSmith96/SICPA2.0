@@ -61,7 +61,7 @@ class TipoCCController extends Controller {
 		$tcc_id=$request->get('tcc_id');
 		$tipocc = TipoCC::find($tcc_id);
 
-		return view('tipocc.editar',['tipocc'=>$tipocc]);
+		return $tipocc;
 	}
 
 	public function postEditar(Request $request)

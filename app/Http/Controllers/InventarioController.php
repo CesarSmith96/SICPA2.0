@@ -41,8 +41,9 @@ class InventarioController extends Controller {
 	 */
 	public function getIndex()
 	{
+		$productos =Producto::all();
 		$inventarios = Inventario::join('t_producto','t_producto.prod_id','=','t_inventario.prod_id')->select('t_inventario.*')->orderBy('prod_desc','asc')->get();
-		return view('inventario.mostrar',['inventarios'=> $inventarios]);
+		return view('inventario.mostrar',['inventarios'=> $inventarios, 'productos'=>$productos]);
 	}
 
 	public function postIndex(Request $request)
@@ -76,7 +77,8 @@ class InventarioController extends Controller {
 
 	public function postCrear(Request $request)
 	{
-		$this->validate($request,['inv_id'=>'required']);
+		//$this->validate($request,['inv_id'=>'required']);
+		$this->validate($request,['inv_cant' =>'required|unique:t_inventario']);
 
 		Inventario::create
 		(

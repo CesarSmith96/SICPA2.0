@@ -1,4 +1,22 @@
-@extends('app')
+@extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
+
+</style>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+</script>
+<script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
+<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+
 <script type="text/javascript">
 	function imprimir(){
 	  var objeto=document.getElementById('imprimir');  //obtenemos el objeto a imprimir
@@ -9,6 +27,7 @@
 	  ventana.close();  //cerramos la ventana
 	}
 </script>
+@endsection
 @section('content')
 @if (Session::has('creado'))
 	<div class="alert alert-success">
@@ -25,108 +44,52 @@
 		{{Session::get('eliminado')}}
 	</div>
 @endif
-<div class="container-fluid">
-	<div class="col-md-12 col-md-offset-0">
-		<div class="panel panel-default">
-			<div class="panel-heading">Búsqueda</div>
-			<div class="panel-body">
-				<form class="form-inline" role="form" method="POST" action="/validado/ingreso"  style="font-size: 11px">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					
-					<div class="form-group col-md-offset-0">
-						<label>Nro</label>
-						<div>
-							<input type="text" class="form-control text-uppercase" name="comp_nro">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Proveedor</label>
-						<div>
-							<select class="form-control text-uppercase" name="ent_id">
-								<option  value=0>Elija Proveedor</option>
-								@foreach ($entidades as $entidad)
-								   <option  value='{{$entidad->ent_id}}'>{{$entidad->ent_rz}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Guía de Remisión</label>
-						<div>
-							<input type="text" class="form-control text-uppercase" name="comp_guia">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Tipo</label>
-						<div>
-							<select class="form-control text-uppercase" name="tcomp_id">
-								<option  value=0>Elija Tipo</option>
-							   @foreach ($tipocomprobantes as $tipocomprobante)
-							   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Fecha</label>
-						<div>
-							<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
-							<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Condición</label>
-						<div>
-							<select class="form-control text-uppercase" name="comp_cond">
-									<option  value=0>Elija Condición</option>
-									<option >AL CONTADO</option>
-									<option >MUESTRA GRATUITA</option>
-									<option >AL CREDITO</option>
-									<option >Otro</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Moneda</label>
-						<div>
-							<select class="form-control text-uppercase" name="comp_moneda">
-								<option  value=0>Elija Moneda</option>
-							   <option value="DOLAR">DOLÁR AMERICANO</option>
-							   <option value="SOLES">SOLES</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>IGV</label>
-						<div>
-							<input type="radio" name="igv" value="C">CON IGV</input>
-							<input type="radio" name="igv" value="S">SIN IGV</input>
-							<input type="radio" name="igv" value="A">AMBOS</input>
-						</div>
-					</div>
-					<div class="col-md-offset-0">
-						</br>
-						<button type="submit" name="buscar" value="buscar" class="btn btn-default">
-							<img src="/images/buscar.png" title="BUSCAR">
-						</button>
-						<button type="submit" name="imprimir" value="imprimir" class="btn btn-default">
-							<img src="/images/imprimir.png" title="IMPRIMIR">
-						</button>
-					</div>
-					
-				</form>
-			</div>
-		</div>
-	</div>
+<div class="content">
+	<ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="hover" id="fab-menu-affixed-demo-right">
+		<li>
+			<a class="fab-menu-btn btn bg-teal-400 btn-float rounded-round btn-icon">
+				<i class="fab-icon-open icon-paragraph-justify3"></i>
+				<i class="fab-icon-close icon-cross2"></i>
+			</a>
 
-	<div class="col-md-12 col-md-offset-0" id="imprimir">
-		<div class="panel panel-default">
-			<div class="panel-heading">Compra</div>
+			<ul class="fab-menu-inner">
+				<li>
+					<div data-fab-label="Agregar">
+						<a href="/validado/ingreso/crear" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+							<i class="icon-plus3"></i>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div data-fab-label="Exportar">
+						<form class="form-inline" role="form" method="POST" action="/validado/ingreso">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<button type="submit" name="exportarxls" value="imprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+							<i class="icon-printer2"></i> 
+						</button>
+						</form>
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-			<div class="panel-body">
-				<a href="/validado/ingreso/crear" class="btn btn-success" role="button">Nueva Compra</a>
-				<br/><br/>
-				<table class="table" style="font-size: 11px">
+	<div class="col-md-12 col-centered">
+		<div class="card border-success-400">
+
+			<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Compras</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                		<a class="list-icons-item" data-action="remove"></a>
+	                	</div>
+	            	</div>
+				</div>
+
+			<div class="card-body">
+				<table class="table table-bordered table-hover datatable-basic table-xs" style="font-size: 11px">
+					<thead>
 						<tr>
 							<th>Nro.</th>
 							<th>Tipo</th>
@@ -143,6 +106,7 @@
 							<th>T. Cambio</th>	
 							<th width="230">Acciones</th>	
 						</tr>
+					</thead>
 
 				@if(sizeof($comprobantes)>0)
 					
@@ -166,19 +130,22 @@
 							<td>{{$comprobante->comp_cond}}</td>
 							<td>{{$comprobante->comp_moneda}}</td>
 							<td>{{$comprobante->comp_tipcambio}}</td> 
-							<td>
-							<a href="/validado/detalleingreso?comp_id={{$comprobante->comp_id}}"><img src="/images/detalle.png" title="VER DETALLE"></a>
-							<a href="/validado/ingreso/editar?comp_id={{$comprobante->comp_id}}"><img src="/images/editar.png" title="EDITAR"></a>
-							<a href="/validado/ingreso/eliminar?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
+							<td class="text-center">
+								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
+								<div class='dropdown-menu dropdown-menu-right'>
+									<a href="/validado/detalleingreso?comp_id={{$comprobante->comp_id}}"><img src="/images/detalle.png" title="VER DETALLE"></a>
+									<a href="/validado/ingreso/editar?comp_id={{$comprobante->comp_id}}"><img src="/images/editar.png" title="EDITAR"></a>
+									<a href="/validado/ingreso/eliminar?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
 
-							@if($comprobante->comp_doc!='')
-								<a target="_blank" href="/img/{{$comprobante->comp_doc}}"><img src="/images/pdf.png" title="VER ARCHIVO"></a>
-							@endif
-							@if($comprobante->comp_est!='ANULADO')
-								<a href="/validado/ingreso/sanular?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular?')"><img src="/images/anular.png" title="ANULAR"></a>
-								<!--<a href="/validado/notacredito/crear?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular con NOTA DE CRÉDITO?')"><img src="/images/ncredito.png" title="ANULAR CON NOTA DE CRÉDITO"></a>
-								<a href="/validado/notacredito/seleccionar?comp_id={{$comprobante->comp_id}}"><img src="/images/asignarnc.png" title="PAGAR CON NOTA DE CRÉDITO"></a>-->
-							@endif
+									@if($comprobante->comp_doc!='')
+										<a target="_blank" href="/img/{{$comprobante->comp_doc}}"><img src="/images/pdf.png" title="VER ARCHIVO"></a>
+									@endif
+									@if($comprobante->comp_est!='ANULADO')
+										<a href="/validado/ingreso/sanular?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular?')"><img src="/images/anular.png" title="ANULAR"></a>
+										<!--<a href="/validado/notacredito/crear?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular con NOTA DE CRÉDITO?')"><img src="/images/ncredito.png" title="ANULAR CON NOTA DE CRÉDITO"></a>
+										<a href="/validado/notacredito/seleccionar?comp_id={{$comprobante->comp_id}}"><img src="/images/asignarnc.png" title="PAGAR CON NOTA DE CRÉDITO"></a>-->
+									@endif
+								</div>
 							</td>
 
 						</tr>

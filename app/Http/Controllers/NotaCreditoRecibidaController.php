@@ -112,7 +112,7 @@ class NotaCreditoRecibidaController extends Controller {
 		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
 
-		if(Input::get('imprimir'))
+		if(Input::get('exportarxls'))
 			$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','8')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
 			return view('reporte.notacreditorecibida',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 		return view('notacreditorecibida.mostrar',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);

@@ -1,4 +1,16 @@
 @extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
+
+</style>
+@endsection
 @section('javascript')
 <script type="text/javascript">
 </script>
@@ -143,60 +155,12 @@ function setEditarModal(btn){
 					</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn bg-success">Guardar Cambios</button>
                 </form>
             </div>
         </div>
     </div>
-</div>
-
-
-<div>
-	<div class="page-header page-header-dark has-cover">
-		<div class="page-header-content header-elements-inline">
-			<div class="page-title">
-				<h5>
-					<i class="icon-arrow-left52 mr-2"></i>
-					<span class="font-weight-semibold">Unidades de Medida</span>
-					<small class="d-block opacity-75">SICPA</small>
-				</h5>
-			</div>
-
-			<div class="header-elements d-flex align-items-center">
-                <a class="btn bg-blue btn-labeled btn-labeled-left" href="#" data-toggle="modal" data-target="#crearModal"><b><i class="icon-plus3"></i></b> Crear Unidad de Medida</a>
-			</div>
-		</div>
-
-		<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-			<div class="d-flex">
-				<div class="breadcrumb">
-					<a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-					<a href="components_page_header.html" class="breadcrumb-item">Current</a>
-					<span class="breadcrumb-item active">Location</span>
-				</div>
-
-				<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-			</div>
-
-			<div class="header-elements d-none">
-				<div class="breadcrumb justify-content-center">
-					<a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
-						Actions
-					</a>
-
-					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-						<a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-						<a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
 </div>
 
 @if (Session::has('creado'))
@@ -216,50 +180,62 @@ function setEditarModal(btn){
 @endif
 
 <div class="content">
+	<ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="click">
+		<li>
+			<a class="fab-menu-btn btn bg-teal-400 btn-float rounded-round btn-icon" data-toggle="modal" data-target="#crearModal">
+				<i class="fab-icon-open icon-plus3"></i>
+				<i class="fab-icon-close icon-plus3"></i>
+			</a>
+		</li>
+	</ul>
 	<div class="row">
 		<div class="col-md-9 col-centered">
 			<div class="card border-success-400">
-				<div class="card-header bg-teal text-white header-elements-inline">
+				<div class="card-header bg-dark header-elements-inline">
 					<h6 class="card-title">Lista de Unidades de Medida</h6>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
-	                		<a class="list-icons-item" data-action="reload"></a>
-	                		<a class="list-icons-item" data-action="remove"></a>
 	                	</div>
 	            	</div>
 				</div>
-				<table class="table datatable-basic">
-					<thead>
-						<tr>
-							<th>Código</th>
-							<th>Descripción</th>
-							<th>Abreviatura</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
+				<div class="card-body">
+					<table class="table table-bordered table-hover datatable-basic table-xs">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Descripción</th>
+								<th>Abreviatura</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
 
-				@if(sizeof($unidadmedidas)>0)
-					
+					@if(sizeof($unidadmedidas)>0)
+						
 
-					@foreach ($unidadmedidas as $unidadmedida)
-						<tr>
-							<td>{{$unidadmedida->um_id}}</td>
-							<td>{{$unidadmedida->um_desc}}</td>
-							<td>{{$unidadmedida->um_abrev}}</td>
-							<td><a hhref="#" class="btn btn-primary" data-toggle="modal" data-target="#editarModal" um_id="{{$unidadmedida->um_id}}" onclick="setEditarModal(this)">Editar</a>
-							<a href="/validado/unidadmedida/eliminar?um_id={{$unidadmedida->um_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger">Eliminar</a>
-						</tr>
-					@endforeach
+						@foreach ($unidadmedidas as $unidadmedida)
+							<tr>
+								<td>{{$unidadmedida->um_id}}</td>
+								<td>{{$unidadmedida->um_desc}}</td>
+								<td>{{$unidadmedida->um_abrev}}</td>
+								<td class="text-center">
+									<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
+									<div class='dropdown-menu dropdown-menu-right'>
+										<a hhref="#" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editarModal" um_id="{{$unidadmedida->um_id}}" onclick="setEditarModal(this)"><i class="icon-reset"></i>Editar</a>
+										<a href="/validado/unidadmedida/eliminar?um_id={{$unidadmedida->um_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger dropdown-item"><i class="icon-cancel-square2"></i>Eliminar</a>
+									</div>
+								</td>
+							</tr>
+						@endforeach
 
-				@else
-					<div class="alert alert-danger">
-						<p>Al parecer no tiene unidades</p>
-					</div>
-				@endif
+					@else
+						<div class="alert alert-danger">
+							<p>Al parecer no tiene unidades</p>
+						</div>
+					@endif
 
-				</table>
-
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

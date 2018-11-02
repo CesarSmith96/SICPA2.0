@@ -1,4 +1,22 @@
-@extends('app')
+@extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
+
+</style>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+</script>
+<script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
+<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+@endsection
 
 @section('content')
 @if (Session::has('creado'))
@@ -16,99 +34,51 @@
 		{{Session::get('eliminado')}}
 	</div>
 @endif
-<div class="container-fluid">
-	<div class="col-md-12 col-md-offset-0">
-		<div class="panel panel-default">
-			<div class="panel-heading">Búsqueda</div>
-			<div class="panel-body" style="font-size: 13px">
-				<form class="form-inline" role="form" method="POST" action="/validado/salidaexterno">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					
-					<div class="form-group col-md-offset-0">
-						<label>Nro</label>
-						<div>
-							<input type="text" class="form-control text-uppercase" name="ie_comp">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>RUC</label>
-						<div>
-							<input type="text" class="form-control text-uppercase" name="ie_ruc">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Razón Social</label>
-						<div>
-							<input type="text" class="form-control text-uppercase" name="ie_rz">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Guía de Remisión</label>
-						<div>
-							<input type="text" class="form-control text-uppercase" name="ie_guia">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Tipo</label>
-						<div>
-							<select class="form-control text-uppercase" name="ie_tcomp">
-								<option  value=0>Elija Tipo</option>
-								<option>BOLETA</option>
-							   	<option>FACTURA</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Fecha</label>
-						<div>
-							<input type="date" class="form-control text-uppercase" name="ie_fecha_ini">
-							<input type="date" class="form-control text-uppercase" name="ie_fecha_fin">
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Moneda</label>
-						<div>
-							<select class="form-control text-uppercase" name="ie_moneda">
-								<option  value=0>Elija Moneda</option>
-							  	<option value="DOLAR">DOLÁR AMERICANO</option>
-								<option value="SOLES">SOLES</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group col-md-offset-0">
-						<label>Vendedor</label>
-						<div>
-							<select class="form-control text-uppercase" name="vend_id">
-								<option  value=0>Elija Funcionario</option>
-							   @foreach ($vendedores as $vendedor)
-							   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-					<div class="col-md-offset-0">
-						</br>
-						<button type="submit" name="buscar" value="buscar" class="btn btn-default">
-							<img src="/images/buscar.png" title="BUSCAR">
-						</button>
-						<button type="submit" name="imprimir" value="imprimir" class="btn btn-default">
-							<img src="/images/imprimir.png" title="IMPRIMIR">
-						</button>
-					</div>
-					
-				</form>
-			</div>
-		</div>
-	</div>
+<div class="content">
 
-	<div class="col-md-12 col-md-offset-0">
-		<div class="panel panel-default">
-			<div class="panel-heading">Gasto</div>
+	<ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="hover" id="fab-menu-affixed-demo-right">
+		<li>
+			<a class="fab-menu-btn btn bg-teal-400 btn-float rounded-round btn-icon">
+				<i class="fab-icon-open icon-paragraph-justify3"></i>
+				<i class="fab-icon-close icon-cross2"></i>
+			</a>
 
-			<div class="panel-body">
-				<a href="/validado/salidaexterno/crear" class="btn btn-success" role="button">Nueva Gasto</a>
-				<br/><br/>
-				<table class="table" style="font-size: 11px">
+			<ul class="fab-menu-inner">
+				<li>
+					<div data-fab-label="Agregar">
+						<a href="/validado/salidaexterno/crear" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+							<i class="icon-plus3"></i>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div data-fab-label="Imprimir">
+						<form class="form-inline" role="form" method="POST" action="/validado/salidaexterno">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<button type="submit" name="imprimir" value="imprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+							<i class="icon-printer2"></i> 
+						</button>
+						</form>
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+	<div class="col-md-12 col-centered">
+		<div class="card border-success-400">
+			<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Gasto</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                		<a class="list-icons-item" data-action="remove"></a>
+	                	</div>
+	            	</div>
+				</div>
+			<div class="card-body" style="overflow: auto;">
+				<table class="table table-bordered table-hover datatable-basic table-xs">
+					<thead>
 						<tr>
 							<th>Nro.</th>
 							<th>Tipo</th>
@@ -125,6 +95,7 @@
 							<th>T. Gasto</th>	
 							<th>Acciones</th>	
 						</tr>
+					</thead>
 
 				@if(sizeof($ieexternos)>0)
 					
@@ -144,10 +115,13 @@
 							<td>{{$ieexterno->ie_tipcambio}}</td>
 							<td>{{$ieexterno->vendedor->vend_nom}}</td>
 							<td>{{$ieexterno->ie_tipgasto}}</td>
-							<td>
-							<a href="/validado/detallesalidaexterno?ie_id={{$ieexterno->ie_id}}"><img src="/images/detalle.png"  title="VER DETALLE"></a>
-							<a href="/validado/salidaexterno/editar?ie_id={{$ieexterno->ie_id}}"><img src="/images/editar.png" title="EDITAR"></a>
-							<a href="/validado/salidaexterno/eliminar?ie_id={{$ieexterno->ie_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
+							<td class="text-center">
+								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
+								<div class='dropdown-menu dropdown-menu-right'>
+									<a href="/validado/detallesalidaexterno?ie_id={{$ieexterno->ie_id}}"><img src="/images/detalle.png"  title="VER DETALLE"></a>
+									<a href="/validado/salidaexterno/editar?ie_id={{$ieexterno->ie_id}}"><img src="/images/editar.png" title="EDITAR"></a>
+									<a href="/validado/salidaexterno/eliminar?ie_id={{$ieexterno->ie_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
+								</div>
 							</td>
 						</tr>
 					@endforeach

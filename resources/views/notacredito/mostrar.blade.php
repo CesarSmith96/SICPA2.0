@@ -1,4 +1,22 @@
-@extends('app')
+@extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
+
+</style>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+</script>
+<script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
+<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+@endsection
 
 @section('content')
 @if (Session::has('creado'))
@@ -16,20 +34,29 @@
 		{{Session::get('eliminado')}}
 	</div>
 @endif
-<div class="container-fluid">
-	<div class="col-md-8 col-md-offset-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">Notas de Credito</div>
+<div class="content">
+	<div class="col-md-9 col-centered">
+		<div class="card border-success-400">
+			<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Notas de Credito</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                		<a class="list-icons-item" data-action="remove"></a>
+	                	</div>
+	            	</div>
+				</div>
 
-			<div class="panel-body">
-				<br/><br/>
-				<table class="table">
+			<div class="card-body">
+				<table class="table table-bordered table-hover datatable-basic table-xs">
+					<thead>
 						<tr>
 							<th>Nro. Nota de Crédito</th>
 							<th>Comprobante</th>
 							<th>Total</th>
 							<th>Observaciones</th>
 						</tr>
+					</thead>
 
 				@if(sizeof($notacreditos)>0)
 					

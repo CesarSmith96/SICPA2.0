@@ -1,5 +1,16 @@
-
 @extends('plantillas.headeradmin')
+@section('css')
+<style type="text/css">
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #81A8BA;
+  color: #000000;
+}
+.content {
+    background-image: url("{{asset('assets/img/textura.jpg')}}");
+}
+
+</style>
+@endsection
 @section('javascript')
 <script type="text/javascript">
 </script>
@@ -10,9 +21,16 @@
 
 $( document ).ready(function() {
 	@if (count($errors) > 0)
-    	$('#crearModal').modal('show');
+		$('#editarModal').modal('show');
 	@endif
 });
+
+$( document ).ready(function() {
+	@if (count($errors) > 0)
+		$('#crearModal').modal('show');
+	@endif
+});
+
 
 function setEditarModal(btn){
     var ent_id = $(btn).attr( "ent_id" );
@@ -203,7 +221,7 @@ function setEditarModal(btn){
 					</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn bg-success">Guardar Cambios</button>
                 </form>
             </div>
@@ -211,52 +229,6 @@ function setEditarModal(btn){
     </div>
 </div>
 
-<div>
-	<div class="page-header bg-success">
-		<div class="page-header-content header-elements-inline">
-			<div class="page-title">
-				<h5>
-					<i class="icon-arrow-left52 mr-2"></i>
-					<span class="font-weight-semibold">Proveedores</span>
-					<small class="d-block opacity-75">SICPA</small>
-				</h5>
-			</div>
-
-			<div class="header-elements d-flex align-items-center">
-                <a class="btn bg-blue btn-labeled btn-labeled-left" id="btnModalCrearProveedor" href="#" data-toggle="modal" data-target="#crearModal"><b><i class="icon-plus3"></i></b> Crear Proveedor</a>
-			</div>
-		</div>
-
-		<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-			<div class="d-flex">
-				<div class="breadcrumb">
-					<a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-					<a href="components_page_header.html" class="breadcrumb-item">Current</a>
-					<span class="breadcrumb-item active">Location</span>
-				</div>
-
-				<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-			</div>
-
-			<div class="header-elements d-none">
-				<div class="breadcrumb justify-content-center">
-					<a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
-						Actions
-					</a>
-
-					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-						<a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-						<a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</div>
 
 @if (Session::has('creado'))
 	<div class="alert alert-success">
@@ -275,63 +247,73 @@ function setEditarModal(btn){
 @endif
 
 <div class="content">
+	<ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="click">
+		<li>
+			<a class="fab-menu-btn btn bg-teal-400 btn-float rounded-round btn-icon" data-toggle="modal" data-target="#crearModal">
+				<i class="fab-icon-open icon-plus3"></i>
+				<i class="fab-icon-close icon-plus3"></i>
+			</a>
+		</li>
+	</ul>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card border-success-400">
-				<div class="card-header bg-success text-white header-elements-inline">
+				<div class="card-header bg-dark header-elements-inline">
 					<h6 class="card-title">Lista de Proveedores</h6>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
-	                		<a class="list-icons-item" data-action="reload"></a>
-	                		<a class="list-icons-item" data-action="remove"></a>
 	                	</div>
 	            	</div>
 				</div>
-				
-				<table class="table datatable-basic">
-					<thead>
-						<tr>
-							<th>RUC</th>
-							<th>Razón Social</th>
-							<th>Correo</th>
-							<th>Dirección</th>
-							<th>Ciudad</th>
-							<th>Teléfono</th>
-							<th>Contacto</th>
-							<th>Teléfono de Contacto</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
+				<div class="card-body">
+					<table class="table table-bordered table-hover datatable-basic table-xs">
+						<thead>
+							<tr>
+								<th>RUC</th>
+								<th>Razón Social</th>
+								<th>Correo</th>
+								<th>Dirección</th>
+								<th>Ciudad</th>
+								<th>Teléfono</th>
+								<th>Contacto</th>
+								<th>Teléfono de Contacto</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
 
-				@if(sizeof($entidades)>0)
-					
+					@if(sizeof($entidades)>0)
+						
 
-					@foreach ($entidades as $entidad)
-						<tr>
-							<td>{{$entidad->ent_ruc}}</td>
-							<td>{{$entidad->ent_rz}}</td>
-							<td>{{$entidad->ent_correo}}</td>
-							<td>{{$entidad->ent_dir}}</td>
-							<td>{{$entidad->ent_ciu}}</td>
-							<td>{{$entidad->ent_tel}}</td>
-							<td>{{$entidad->ent_cont}}</td>
-							<td>{{$entidad->ent_ctel}}</td>
-							<td>
-								<a a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editarModal" ent_id="{{$entidad->ent_id}}" onclick="setEditarModal(this)">Editar</a>
+						@foreach ($entidades as $entidad)
+							<tr>
+								<td>{{$entidad->ent_ruc}}</td>
+								<td>{{$entidad->ent_rz}}</td>
+								<td>{{$entidad->ent_correo}}</td>
+								<td>{{$entidad->ent_dir}}</td>
+								<td>{{$entidad->ent_ciu}}</td>
+								<td>{{$entidad->ent_tel}}</td>
+								<td>{{$entidad->ent_cont}}</td>
+								<td>{{$entidad->ent_ctel}}</td>
+								<td class="text-center">
+									<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
+									<div class='dropdown-menu dropdown-menu-right'>
+										<a a href="#" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editarModal" ent_id="{{$entidad->ent_id}}" onclick="setEditarModal(this)"><i class="icon-reset"></i>Editar</a>
 
-							<a href="/validado/proveedor/eliminar?ent_id={{$entidad->ent_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger">Eliminar</a>
-						</tr>
-					@endforeach
+										<a href="/validado/proveedor/eliminar?ent_id={{$entidad->ent_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger dropdown-item"><i class="icon-cancel-square2"></i>Eliminar</a>
+									</div>
+								</td>
+							</tr>
+						@endforeach
 
-				@else
-					<div class="alert alert-danger">
-						<p>Al parecer no tiene Proveedores</p>
-					</div>
-				@endif
+					@else
+						<div class="alert alert-danger">
+							<p>Al parecer no tiene Proveedores</p>
+						</div>
+					@endif
 
-				</table>
-
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

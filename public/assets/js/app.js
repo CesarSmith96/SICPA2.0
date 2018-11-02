@@ -12,7 +12,6 @@
 
 var App = function () {
 
-
     //
     // Setup module components
     //

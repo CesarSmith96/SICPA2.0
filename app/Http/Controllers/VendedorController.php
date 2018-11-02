@@ -67,7 +67,7 @@ class VendedorController extends Controller {
 		$vend_id=$request->get('vend_id');
 		$vendedor = Vendedor::find($vend_id);
 
-		return view('vendedor.editar',['vendedor'=>$vendedor]);
+		return $vendedor;
 
 	}
 

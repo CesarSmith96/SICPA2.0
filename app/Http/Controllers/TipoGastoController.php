@@ -61,7 +61,7 @@ class TipoGastoController extends Controller {
 		$tgasto_id=$request->get('tgasto_id');
 		$tipogasto = TipoGasto::find($tgasto_id);
 
-		return view('tipogasto.editar',['tipogasto'=>$tipogasto]);
+		return $tipogasto;
 	}
 
 	public function postEditar(Request $request)

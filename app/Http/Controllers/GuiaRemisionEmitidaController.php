@@ -114,7 +114,7 @@ class GuiaRemisionEmitidaController extends Controller {
 		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
 
-		if(Input::get('imprimir'))
+		if(Input::get('exportarxls'))
 			return view('reporte.ingresoexcel',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 		return view('guiaremisionemitida.mostrar',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 	}
