@@ -51,8 +51,9 @@ class ClienteController extends Controller {
 		$ent_dir=strtoupper($request->get('ent_dir'));
 		$ent_cont=strtoupper($request->get('ent_cont'));
 
-		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->where('ent_ruc','like','%'.$ent_ruc.'%')->where('ent_rz','like','%'.$ent_rz.'%')->where('ent_ciu','like','%'.$ent_ciu.'%')->where('ent_cont','like','%'.$ent_cont.'%')->where('ent_dir','like','%'.$ent_dir.'%')->where('ent_dpto','like','%'.$ent_dpto.'%')->orderBy('ent_rz')->get(); // 1 es el cliente 
+		 
 		if(Input::get('imprimir'))
+			$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz')->get();
 			return view('reporte.cliente',['entidades'=> $entidades]);
 		return view('cliente.mostrar',['entidades'=> $entidades]);
 	}

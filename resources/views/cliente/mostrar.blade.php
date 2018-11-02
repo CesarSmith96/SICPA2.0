@@ -297,7 +297,7 @@ request.fail(function(jqXHR, textStatus) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn bg-success">Guardar Cambios</button
+                <button type="submit" class="btn bg-success">Guardar Cambios</button>
                 </form>
             </div>
         </div>
