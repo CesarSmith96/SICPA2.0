@@ -12,11 +12,9 @@
 </style>
 @endsection
 @section('javascript')
-<script type="text/javascript">
-</script>
 <script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
 <script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 <script type="text/javascript">
       $(document).ready(function () {
           	$('#monto').keyup(function () {
@@ -40,9 +38,7 @@
           	});
 			
       });
-</script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
+
     $(document).ready(function(){
         /**
          * Funcion para añadir una nueva columna en la tabla
@@ -93,8 +89,7 @@
             $('#cambio').val("SI");
         });
     });
- </script>
-<script type="text/javascript">
+
 	function getvaltipmon(sel)
 	{	    
 	    if(sel.value=="DOLAR")
