@@ -27,9 +27,9 @@
 		        if(moneda!=comp_moneda)
 				{
 					if(moneda=="DOLAR")
-						$('#pago_monto').val((monto*pago_tipcambio).toFixed(2));
+						$('#pagop_monto').val((monto*pagop_tipcambio).toFixed(2));
 					else
-						$('#pago_monto').val((monto/pago_tipcambio).toFixed(2));
+						$('#pagop_monto').val((monto).toFixed(2));
 				}
 				else
 				{
@@ -376,7 +376,7 @@
 													<input type="text" class="form-control text-uppercase" name="pagop_tipcambio"  id="pagop_tipcambio">
 												</td>
 												<td>
-													<input type="text" class="form-control text-uppercase" name="pagop_monto" id="u88monto">
+													<input type="text" class="form-control text-uppercase" name="pagop_monto" id="monto">
 												</td>
 												<td>
 													<input type="text" class="form-control text-uppercase" name="pagop_monto" id="pagop_monto">
