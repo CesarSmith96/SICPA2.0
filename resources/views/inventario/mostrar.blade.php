@@ -111,6 +111,7 @@ function getUp(sel)
 		{{Session::get('eliminado')}}
 	</div>
 @endif
+
 <div class="content">
 	<ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="hover" id="fab-menu-affixed-demo-right">
 		<li>
@@ -131,7 +132,7 @@ function getUp(sel)
 					<div data-fab-label="Imprimir">
 						<form class="form-inline" role="form" method="POST" action="/validado/inventario">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="imprimir" value="imprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+						<button type="submit" name="imprimirinv" value="imprimirinv" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
 							<i class="icon-printer2"></i> 
 						</button>
 						</form>
@@ -191,52 +192,6 @@ function getUp(sel)
 					@endif
 
 					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-9 col-centered">
-			<div class="card border-success-400">
-				<div class="card-header header-elements-inline bg-dark">
-					<h6 class="card-title">Busqueda</h6>
-				</div>
-				<div class="card-body">
-					<form class="form-horizontal" role="form" method="POST" action="/validado/inventario">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<div class="form-group">
-							<label class="col-md-3 control-label">Producto</label>
-							<div>
-								<input type="text" class="form-control text-uppercase" name="prod_desc">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">Stock</label>
-							<div>
-								<input type="number" class="form-control text-uppercase" name="cant_min">
-								<br/>
-								<input type="number" class="form-control text-uppercase" name="cant_max">
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary">
-										Buscar
-									</button>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<button type="submit" name="imprimirinv" value="imprimir" class="btn btn-default">
-									<img src="/images/imprimir.png" title="IMPRIMIR">
-									</button>
-								</div>
-							</div>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>

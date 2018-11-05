@@ -18,11 +18,11 @@
 <script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
 <script type="text/javascript">
       $(document).ready(function () {
-          	$('#pagop_monto').keyup(function () {
-             	var monto = $('#pagop_monto').val();
+          	$('#monto').keyup(function () {
+             	var monto = $('#monto').val();
              	var comp_moneda = $('#comp_moneda').val();
              	var moneda = $('#moneda').val();
-             	var pago_tipcambio = $('#pagop_tipcambio').val();
+             	var pagop_tipcambio = $('#pagop_tipcambio').val();
 
 		        if(moneda!=comp_moneda)
 				{
@@ -138,7 +138,7 @@
 @section('content')
 <div class="content">
 	<div class="row">
-		<div class="col-md-9 col-centered">
+		<div class="col-md-11 col-centered">
 			<div class="card border-success-400">
 				<div class="card-header header-elements-inline bg-dark">
 					<h6 class="card-title">Editar Compra</h6>
@@ -376,7 +376,7 @@
 													<input type="text" class="form-control text-uppercase" name="pagop_tipcambio"  id="pagop_tipcambio">
 												</td>
 												<td>
-													<input type="text" class="form-control text-uppercase" name="pagop_monto" id="pagop_monto">
+													<input type="text" class="form-control text-uppercase" name="pagop_monto" id="u88monto">
 												</td>
 												<td>
 													<input type="text" class="form-control text-uppercase" name="pagop_monto" id="pagop_monto">

@@ -327,19 +327,22 @@ function getCodigo()
 					</div>
 				</li>
 				<li>
-					<div data-fab-label="Imprimir">							
-						<button id="btnImprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
-							<i class="icon-printer2"></i> 
-						</button>
+					<div data-fab-label="Imprimir">	
+						<form class="form-inline" role="form" method="POST" action="/validado/producto">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<button type="submit" name="imprimir" value="imprimir" id="btnImprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+								<i class="icon-printer2"></i> 
+							</button>
+						</form>
 					</div>
 				</li>
 				<li>
 					<div data-fab-label="Exportar">
 						<form class="form-inline" role="form" method="POST" action="/validado/producto">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="exportarxls" value="imprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
-							<i class="icon-file-download"></i> 
-						</button>
+							<button type="submit" name="exportarxls" value="exportarxls" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+								<i class="icon-file-download"></i> 
+							</button>
 						</form>
 					</div>
 				</li>

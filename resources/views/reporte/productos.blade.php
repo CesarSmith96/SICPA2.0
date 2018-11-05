@@ -47,7 +47,7 @@
 <?php
 	$reporte = ob_get_clean();
 	header("Content-type: application/vnd.ms-excel");  
-	header("Content-Disposition: attachment; filename=Resumen.xls");  
+	header("Content-Disposition: attachment; filename=Producto.xls");  
 	header("Pragma: no-cache");  
 	header("Expires: 0");   
 

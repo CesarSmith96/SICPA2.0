@@ -110,7 +110,7 @@
 	</div>
 @endif
 <div class="content">
-	<div class="col-md-12 col-centered">
+	<div class="col-md-10 col-centered">
 			<div class="card border-success-400">
 			<div class="card-header header-elements-inline bg-dark">
 					<h6 class="card-title">Reportes</h6>
@@ -121,108 +121,19 @@
 	            	</div>
 				</div>
 				<div class="card-body border-success-400">
-					<!--<div class="col-md-12 col-md-offset-0">
-						<div class="panel panel-default">
-							<div class="panel-heading">COMPRAS</div>
-							<div class="panel-body">
-								<form class="form-inline" role="form" method="POST" action="/validado/reporte/ingreso">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									
-									<div class="form-group col-md-offset-0">
-										<label>Nro</label>
-										<div>
-											<input type="text" class="form-control text-uppercase" name="comp_nro">
-										</div>
-									</div>
-									<div class="form-group col-md-offset-0">
-										<label>Proveedor</label>
-										<div>
-											<select class="form-control text-uppercase" name="ent_id">
-												<option  value=0>Elija Proveedor</option>
-												@foreach ($entidades as $entidad)
-												   <option  value='{{$entidad->ent_id}}'>{{$entidad->ent_rz}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="form-group col-md-offset-0">
-										<label>Guía de Remisión</label>
-										<div>
-											<input type="text" class="form-control text-uppercase" name="comp_guia">
-										</div>
-									</div>
-									<div class="form-group col-md-offset-0">
-										<label>Tipo</label>
-										<div>
-											<select class="form-control text-uppercase" name="tcomp_id">
-												<option  value=0>Elija Tipo</option>
-											   @foreach ($tipocomprobantes as $tipocomprobante)
-											   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="form-group col-md-offset-0">
-										<label>Fecha</label>
-										<div>
-											<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
-											<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
-										</div>
-									</div>
-									<div class="form-group col-md-offset-0">
-										<label>Condición</label>
-										<div>
-											<select class="form-control text-uppercase" name="comp_cond">
-													<option  value=0>Elija Condición</option>
-													<option >AL CONTADO</option>
-													<option >MUESTRA GRATUITA</option>
-													<option >AL CREDITO</option>
-													<option >Otro</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group col-md-offset-0">
-										<label>Moneda</label>
-										<div>
-											<select class="form-control text-uppercase" name="comp_moneda">
-												<option  value=0>Elija Moneda</option>
-											   <option value="DOLAR">DOLÁR AMERICANO</option>
-											   <option value="SOLES">SOLES</option>
-											</select>
-										</div>
-									</div>									
-									<div class="form-group col-md-offset-0">
-										<label>Vendedor</label>
-										<div>
-											<select class="form-control text-uppercase" name="vend_id">
-												<option  value=0>Elija Vendedor</option>
-											   @foreach ($vendedores as $vendedor)
-											   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="form-group col-md-offset-0">
-										<label>IGV</label>
-										<div>
-											<input type="radio" name="igv" value="C">CON IGV</input>
-											<input type="radio" name="igv" value="S">SIN IGV</input>
-											<input type="radio" name="igv" value="A">AMBOS</input>
-										</div>
-									</div>
-									<div class="col-md-offset-0">
-										</br>
-										<button type="submit" class="btn btn-default">
-											<img src="/images/imprimir.png" title="IMPRIMIR">
-										</button>
-									</div>
-									
-								</form>
-							</div>
-						</div>
-					</div>-->
-					<div class="row">
-						<div class="col-md-4">
+
+					<ul class="nav nav-tabs nav-tabs-bottom ">
+
+						<li class="nav-item"><a href="#compras" class="nav-link active show" data-toggle="tab">Detalle de Compras</a></li>
+						<li class="nav-item"><a href="#ventas" class="nav-link" data-toggle="tab">Detalle de ventas</a></li>
+						<li class="nav-item"><a href="#gastos" class="nav-link" data-toggle="tab">Gastos</a></li>
+						<li class="nav-item"><a href="#creditos" class="nav-link" data-toggle="tab">Creditos</a></li>
+						<li class="nav-item"><a href="#resumen" class="nav-link" data-toggle="tab">Resumen</a></li>
+						
+					</ul>
+					
+					<div class="tab-content">
+						<div class="tab-pane fade active show" id="compras">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 									<h6 class="card-title">DETALLE DE COMPRAS</h6>
@@ -235,99 +146,133 @@
 								<div class="card-body border-success-400">
 									<form class="form-horizontal" role="form" method="POST" action="/validado/reporte/detalleingreso">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										
-										<div class="form-group">
-											<label class=" col-md-offset-0">Nro</label>
-											<div>
-												<input type="text" class="form-control text-uppercase" name="comp_nro">
+
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class=" col-md-offset-0">Nro</label>
+													<div>
+														<input type="text" class="form-control text-uppercase" name="comp_nro">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Proveedor</label>
+													<div>
+														<select class="form-control text-uppercase" name="ent_id">
+															<option  value=0>Elija Proveedor</option>
+															@foreach ($entidades as $entidad)
+															   <option  value='{{$entidad->ent_id}}'>{{$entidad->ent_rz}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Guía de Remisión</label>
+													<div>
+														<input type="text" class="form-control text-uppercase" name="comp_guia">
+													</div>
+												</div>
 											</div>
 										</div>
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Proveedor</label>
-											<div>
-												<select class="form-control text-uppercase" name="ent_id">
-													<option  value=0>Elija Proveedor</option>
-													@foreach ($entidades as $entidad)
-													   <option  value='{{$entidad->ent_id}}'>{{$entidad->ent_rz}}</option>
-													@endforeach
-												</select>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class=" col-md-offset-0">Tipo</label>
+													<div>
+														<select class="form-control text-uppercase" name="tcomp_id">
+															<option  value=0>Elija Tipo</option>
+														   @foreach ($tipocomprobantes as $tipocomprobante)
+														   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class=" col-md-offset-0">Producto</label>
+													<div>
+														<select class="form-control text-uppercase" id="prod_id" name="prod_id">
+															<option value=0>Elija Producto</option>
+															@foreach ($productos as $producto)										
+															   	<option  value='{{$producto->prod_id}}'>{{$producto->prod_desc}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="form-group">
+													<label>Fecha Inicio</label>
+													<div>
+														<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="form-group">
+													<label>Fecha Fin</label>
+													<div>
+														<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
+													</div>
+												</div>
 											</div>
 										</div>
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Guía de Remisión</label>
-											<div>
-												<input type="text" class="form-control text-uppercase" name="comp_guia">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Condición</label>
+													<div>
+														<select class="form-control text-uppercase" name="comp_cond">
+																<option  value=0>Elija Condición</option>
+																<option >AL CONTADO</option>
+																<option >MUESTRA GRATUITA</option>
+																<option >AL CREDITO</option>
+																<option >Otro</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Moneda</label>
+													<div>
+														<select class="form-control text-uppercase" name="comp_moneda">
+															<option  value=0>Elija Moneda</option>
+														   <option value="DOLAR">DOLÁR AMERICANO</option>
+														   <option value="SOLES">SOLES</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">								
+												<div class="form-group">
+													<label>Vendedor</label>
+													<div>
+														<select class="form-control text-uppercase" name="vend_id">
+															<option  value=0>Elija Vendedor</option>
+														   @foreach ($vendedores as $vendedor)
+														   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 											</div>
 										</div>
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Tipo</label>
-											<div>
-												<select class="form-control text-uppercase" name="tcomp_id">
-													<option  value=0>Elija Tipo</option>
-												   @foreach ($tipocomprobantes as $tipocomprobante)
-												   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Producto</label>
-											<div>
-												<select class="form-control text-uppercase" id="prod_id" name="prod_id">
-													<option value=0>Elija Producto</option>
-													@foreach ($productos as $producto)										
-													   	<option  value='{{$producto->prod_id}}'>{{$producto->prod_desc}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>	
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Fecha</label>
-											<div>
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
-												<br/>
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Condición</label>
-											<div>
-												<select class="form-control text-uppercase" name="comp_cond">
-														<option  value=0>Elija Condición</option>
-														<option >AL CONTADO</option>
-														<option >MUESTRA GRATUITA</option>
-														<option >AL CREDITO</option>
-														<option >Otro</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Moneda</label>
-											<div>
-												<select class="form-control text-uppercase" name="comp_moneda">
-													<option  value=0>Elija Moneda</option>
-												   <option value="DOLAR">DOLÁR AMERICANO</option>
-												   <option value="SOLES">SOLES</option>
-												</select>
-											</div>
-										</div>									
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">Vendedor</label>
-											<div>
-												<select class="form-control text-uppercase" name="vend_id">
-													<option  value=0>Elija Vendedor</option>
-												   @foreach ($vendedores as $vendedor)
-												   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class=" col-md-offset-0">IGV</label>
-											<div>
-												<input type="radio" name="igv" value="C">CON IGV</input>
-												<input type="radio" name="igv" value="S">SIN IGV</input>
-												<input type="radio" name="igv" value="A">AMBOS</input>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>IGV</label>
+													<div>
+														<input type="radio" name="igv" value="C">CON IGV</input>
+														<input type="radio" name="igv" value="S">SIN IGV</input>
+														<input type="radio" name="igv" value="A">AMBOS</input>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="col-md-offset-0">
@@ -341,107 +286,8 @@
 								</div>
 							</div>
 						</div>
-						<!--<div class="col-md-12 col-md-offset-0">
-							<div class="panel panel-default">
-								<div class="panel-heading">VENTAS</div>
-								<div class="panel-body">
-									<form class="form-inline" role="form" method="POST" action="/validado/reporte/salida">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										
-										<div class="form-group col-md-offset-0">
-											<label>Nro</label>
-											<div>
-												<input type="text" class="form-control text-uppercase" name="comp_nro">
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label>Proveedor</label>
-											<div>
-												<select class="form-control text-uppercase" name="ent_id">
-													<option  value=0>Elija Proveedor</option>
-													@foreach ($entidades as $entidad)
-													   <option  value='{{$entidad->ent_id}}'>{{$entidad->ent_rz}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label>Guía de Remisión</label>
-											<div>
-												<input type="text" class="form-control text-uppercase" name="comp_guia">
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label>Tipo</label>
-											<div>
-												<select class="form-control text-uppercase" name="tcomp_id">
-													<option  value=0>Elija Tipo</option>
-												   @foreach ($tipocomprobantes as $tipocomprobante)
-												   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label>Fecha</label>
-											<div>
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label>Condición</label>
-											<div>
-												<select class="form-control text-uppercase" name="comp_cond">
-														<option  value=0>Elija Condición</option>
-														<option >AL CONTADO</option>
-														<option >MUESTRA GRATUITA</option>
-														<option >AL CREDITO</option>
-														<option >Otro</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label>Moneda</label>
-											<div>
-												<select class="form-control text-uppercase" name="comp_moneda">
-													<option  value=0>Elija Moneda</option>
-												   <option value="DOLAR">DOLÁR AMERICANO</option>
-												   <option value="SOLES">SOLES</option>
-												</select>
-											</div>
-										</div>									
-										<div class="form-group col-md-offset-0">
-											<label>Vendedor</label>
-											<div>
-												<select class="form-control text-uppercase" name="vend_id">
-													<option  value=0>Elija Vendedor</option>
-												   @foreach ($vendedores as $vendedor)
-												   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label>IGV</label>
-											<div>
-												<input type="radio" name="igv" value="C">CON IGV</input>
-												<input type="radio" name="igv" value="S">SIN IGV</input>
-												<input type="radio" name="igv" value="A">AMBOS</input>
-											</div>
-										</div>
-										<div class="col-md-offset-0">
-											</br>
-											<button type="submit" class="btn btn-default">
-												<img src="/images/imprimir.png" title="IMPRIMIR">
-											</button>
-										</div>
-										
-									</form>
-								</div>
-							</div>
-						</div>-->
-						<div class="col-md-4">
+						
+						<div class="tab-pane fade active show" id="ventas">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 									<h6 class="card-title">DETALLE DE VENTAS</h6>
@@ -454,101 +300,132 @@
 								<div class="card-body border-success-400">
 									<form class="form-horizontal" role="form" method="POST" action="/validado/reporte/detallesalida">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Nro</label>
-											<div>
-												<input type="text" class="form-control text-uppercase" name="comp_nro">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Nro</label>
+													<div>
+														<input type="text" class="form-control text-uppercase" name="comp_nro">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Cliente</label>
+													<div>
+														<section name="intro" id="intro" style="display: block;">
+															<select class="form-control" name="ent_id" id="ent_id">
+																<option  value='todos'>TODOS</option>
+																@foreach ($clientes as $cliente)
+																   <option  value='{{$cliente->ent_id}}'>{{$cliente->ent_rz}}</option>
+																@endforeach
+															</select>
+														</section>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Guía de Remisión</label>
+													<div>
+														<input type="text" class="form-control text-uppercase" name="comp_guia">
+													</div>
+												</div>
 											</div>
 										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Cliente</label>
-											<div>
-												<section name="intro" id="intro" style="display: block;">
-													<select class="form-control" name="ent_id" id="ent_id">
-														<option  value='todos'>TODOS</option>
-														@foreach ($clientes as $cliente)
-														   <option  value='{{$cliente->ent_id}}'>{{$cliente->ent_rz}}</option>
-														@endforeach
-													</select>
-												</section>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label class="col-md-offset-0">Tipo</label>
+													<div>
+														<select class="form-control text-uppercase" name="tcomp_id">
+															<option  value=0>Elija Tipo</option>
+														   @foreach ($tipocomprobantes as $tipocomprobante)
+														   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label class="col-md-offset-0">Producto</label>
+													<div>
+														<select class="form-control text-uppercase" id="prod_id" name="prod_id">
+															<option value=0>Elija Producto</option>
+															@foreach ($productos as $producto)										
+															   	<option  value='{{$producto->prod_id}}'>{{$producto->prod_desc}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="form-group">
+													<label class="col-md-offset-0">Fecha Inicio</label>
+													<div>
+														<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="form-group">
+													<label class="col-md-offset-0">Fecha Fin</label>
+													<div>
+														<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
+													</div>
+												</div>
 											</div>
 										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Guía de Remisión</label>
-											<div>
-												<input type="text" class="form-control text-uppercase" name="comp_guia">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label class="col-md-offset-0">Condición</label>
+													<div>
+														<select class="form-control text-uppercase" name="comp_cond">
+																<option  value=0>Elija Condición</option>
+																<option >AL CONTADO</option>
+																<option >MUESTRA GRATUITA</option>
+																<option >AL CREDITO</option>
+																<option >Otro</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label class="col-md-offset-0">Moneda</label>
+													<div>
+														<select class="form-control text-uppercase" name="comp_moneda">
+															<option  value=0>Elija Moneda</option>
+														   <option value="DOLAR">DOLÁR AMERICANO</option>
+														   <option value="SOLES">SOLES</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label class="col-md-offset-0">Vendedor</label>
+													<div>
+														<select class="form-control text-uppercase" name="vend_id">
+															<option  value=0>Elija Vendedor</option>
+														   @foreach ($vendedores as $vendedor)
+														   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 											</div>
 										</div>
+
 										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Tipo</label>
+											<label class="col-md-offset-0">IGV
+											</label>
 											<div>
-												<select class="form-control text-uppercase" name="tcomp_id">
-													<option  value=0>Elija Tipo</option>
-												   @foreach ($tipocomprobantes as $tipocomprobante)
-												   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Producto</label>
-											<div>
-												<select class="form-control text-uppercase" id="prod_id" name="prod_id">
-													<option value=0>Elija Producto</option>
-													@foreach ($productos as $producto)										
-													   	<option  value='{{$producto->prod_id}}'>{{$producto->prod_desc}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>	
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Fecha</label>
-											<div>
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
-												<br/>
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Condición</label>
-											<div>
-												<select class="form-control text-uppercase" name="comp_cond">
-														<option  value=0>Elija Condición</option>
-														<option >AL CONTADO</option>
-														<option >MUESTRA GRATUITA</option>
-														<option >AL CREDITO</option>
-														<option >Otro</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Moneda</label>
-											<div>
-												<select class="form-control text-uppercase" name="comp_moneda">
-													<option  value=0>Elija Moneda</option>
-												   <option value="DOLAR">DOLÁR AMERICANO</option>
-												   <option value="SOLES">SOLES</option>
-												</select>
-											</div>
-										</div>									
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Vendedor</label>
-											<div>
-												<select class="form-control text-uppercase" name="vend_id">
-													<option  value=0>Elija Vendedor</option>
-												   @foreach ($vendedores as $vendedor)
-												   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">IGV</label>
-											<div>
-												<input type="radio" name="igv" value="C">CON IGV</input>
-												<input type="radio" name="igv" value="S">SIN IGV</input>
-												<input type="radio" name="igv" value="A">AMBOS</input>
+												<input type="radio" name="igv" value="C">CON IGV
+												<input type="radio" name="igv" value="S">SIN IGV
+												<input type="radio" name="igv" value="A">AMBOS
 											</div>
 										</div>
 										<div class="col-md-offset-0">
@@ -563,7 +440,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-4">
+						<div class="tab-pane fade active show" id="gastos">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 									<h6 class="card-title">GASTOS</h6>
@@ -589,55 +466,75 @@
 												</section>
 											</div>
 										</div>-->
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Fecha</label>
-											<div class="col-md-10 col-md-offset-0">
-												<input type="date" class="form-control text-uppercase" name="ie_fecha_ini">
-												<br/>
-												<input type="date" class="form-control text-uppercase" name="ie_fecha_fin">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Fecha Inicio</label>
+													<div>
+														<input type="date" class="form-control text-uppercase" name="ie_fecha_ini">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label>Fecha Fin</label>
+													<div>
+														<input type="date" class="form-control text-uppercase" name="ie_fecha_fin">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label class="col-md-2 col-md-offset-0">Moneda</label>
+													<div>
+														<select class="form-control text-uppercase" name="ie_moneda">
+															<option  value=0>Elija Moneda</option>
+														   <option value="DOLAR">DOLÁR AMERICANO</option>
+														   <option value="SOLES">SOLES</option>
+														</select>
+													</div>
+												</div>
 											</div>
 										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Moneda</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="ie_moneda">
-													<option  value=0>Elija Moneda</option>
-												   <option value="DOLAR">DOLÁR AMERICANO</option>
-												   <option value="SOLES">SOLES</option>
-												</select>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label>Funcionario</label>
+													<div>
+														<select class="form-control text-uppercase" name="vend_id">
+															<option  value=0>Elija Funcionario</option>
+														   @foreach ($funcionarios as $funcionario)
+														   		<option  value='{{$funcionario->vend_id}}'>{{$funcionario->vend_nom}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 											</div>
-										</div>							
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Funcionario</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="vend_id">
-													<option  value=0>Elija Funcionario</option>
-												   @foreach ($funcionarios as $funcionario)
-												   		<option  value='{{$funcionario->vend_id}}'>{{$funcionario->vend_nom}}</option>
-													@endforeach
-												</select>
+											<div class="col-md-4">
+												<div class="form-group col-md-offset-0">
+													<label>Centro de Costos</label>
+													<div>
+														<select class="form-control text-uppercase" name="ie_tipocc">
+															<option  value=0>Elija C. Costos</option>
+														   @foreach ($tipoccs as $tipocc)
+														   		<option>{{$tipocc->tcc_desc}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Centro de Costos</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="ie_tipocc">
-													<option  value=0>Elija C. Costos</option>
-												   @foreach ($tipoccs as $tipocc)
-												   		<option>{{$tipocc->tcc_desc}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Tipo de Gasto</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="ie_tipgasto">
-													<option  value=0>Elija Tipo</option>
-													@foreach ($tipogastos as $tipogasto)
-												   		<option>{{$tipogasto->tgasto_desc}}</option>
-													@endforeach
-												</select>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Tipo de Gasto</label>
+													<div>
+														<select class="form-control text-uppercase" name="ie_tipgasto">
+															<option  value=0>Elija Tipo</option>
+															@foreach ($tipogastos as $tipogasto)
+														   		<option>{{$tipogasto->tgasto_desc}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="col-md-offset-0">
@@ -651,10 +548,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						
-						<div class="col-md-6">
+
+						<div class="tab-pane fade active show" id="creditos">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 								<h6 class="card-title">CRÉDITOS</h6>
@@ -679,39 +574,8 @@
 								</div>
 							</div>
 						</div>
-					<!--<div class="col-md-2">
-						<div class="panel panel-default">
-							<div class="panel-heading">DEUDAS VENCIDAS</div>
-							<div class="panel-body">
-								<form class="form-inline" role="form" method="POST" action="/validado/reporte/dvencidas">
-									<div class="col-md-offset-0">
-										</br>
-										<button type="submit" class="btn btn-default">
-											<img src="/images/imprimir.png" title="IMPRIMIR">
-										</button>
-									</div>
-									
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-2">
-						<div class="panel panel-default">
-							<div class="panel-heading">DEUDAS POR VENCER</div>
-							<div class="panel-body">
-								<form class="form-inline" role="form" method="POST" action="/validado/reporte/dporvencer">
-									<div class="col-md-offset-0">
-										</br>
-										<button type="submit" class="btn btn-default">
-											<img src="/images/imprimir.png" title="IMPRIMIR">
-										</button>
-									</div>
-									
-								</form>
-							</div>
-						</div>
-					</div>-->
-						<div class="col-md-6">
+
+						<div class="tab-pane fade active show" id="resumen">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 									<h6 class="card-title">RESUMEN</h6>
@@ -725,81 +589,36 @@
 								<div class="card-body border-success-400">
 									<form class="form-horizontal" role="form" method="POST" action="/validado/reporte/resumen">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										<!--<div class="form-group col-md-offset-0">
-											<label class="col-md-offset-0">Cliente</label>
-											<div>
-												<section name="intro" id="intro" style="display: block;">
-													<select name="ent_id" id="ent_id">
-														<option  value='todos'>TODOS</option>
-														@foreach ($clientes as $cliente)
-														   <option  value='{{$cliente->ent_id}}'>{{$cliente->ent_rz}}</option>
-														@endforeach
-													</select>
-												</section>
+
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Fecha inicio</label>
+													<div>
+														<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
+													</div>
+												</div>
 											</div>
-										</div>
-										___________________________
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Tipo</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="tcomp_id">
-													<option  value=0>Elija Tipo</option>
-												   @foreach ($tipocomprobantes as $tipocomprobante)
-												   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
-													@endforeach
-												</select>
+											<div class="col-md-4">
+												<div class="form-group">
+													<div>
+														<label>Fecha fin</label>
+														<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
+													</div>
+												</div>
 											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Producto</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" id="prod_id" name="prod_id">
-													<option value=0>Elija Producto</option>
-													@foreach ($productos as $producto)										
-													   	<option  value='{{$producto->prod_id}}'>{{$producto->prod_desc}}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>	-->
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Fecha</label>
-											<div class="col-md-10 col-md-offset-0">
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
-												<br/>
-												<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
-											</div>
-										</div>
-										<!--<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Condición</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="comp_cond">
-														<option  value=0>Elija Condición</option>
-														<option >AL CONTADO</option>
-														<option >MUESTRA GRATUITA</option>
-														<option >AL CREDITO</option>
-														<option >Otro</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Moneda</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="comp_moneda">
-													<option  value=0>Elija Moneda</option>
-												   <option value="DOLAR">DOLÁR AMERICANO</option>
-												   <option value="SOLES">SOLES</option>
-												</select>
-											</div>
-										</div>	-->								
-										<div class="form-group col-md-offset-0">
-											<label class="col-md-2 col-md-offset-0">Vendedor</label>
-											<div class="col-md-10 col-md-offset-0">
-												<select class="form-control text-uppercase" name="vend_id">
-													<option  value=0>Elija Vendedor</option>
-												   @foreach ($vendedores as $vendedor)
-												   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
-													@endforeach
-												</select>
+											<div class="col-md-4">							
+												<div class="form-group">
+													<label>Vendedor</label>
+													<div>
+														<select class="form-control text-uppercase" name="vend_id">
+															<option  value=0>Elija Vendedor</option>
+														   @foreach ($vendedores as $vendedor)
+														   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="col-md-offset-0">
@@ -816,9 +635,7 @@
 						</div>
 					</div>
 
-					
 				</div>
-				
 		</div>
 	</div>
 </div>

@@ -411,10 +411,7 @@ request.fail(function(jqXHR, textStatus) {
 							<th>Acciones</th>
 						</tr>
 					</thead>
-
 					@if(sizeof($entidades)>0)
-						
-
 						@foreach ($entidades as $entidad)
 							<tr>
 								<td>{{strtoupper($entidad->ent_ruc)}}</td>
@@ -447,36 +444,5 @@ request.fail(function(jqXHR, textStatus) {
 			</div>
 		</div>
 	</div>
-
-	<div class="row">
-		<div class="col-md-12 col-centered">
-			<div class="card border-success-400">
-				<div class="card-header bg-dark header-elements-inline">
-					<h6 class="card-title">Busqueda</h6>
-					<div class="header-elements">
-						<div class="list-icons">
-	                		<a class="list-icons-item" data-action="collapse"></a>
-	                		<a class="list-icons-item" data-action="reload"></a>
-	                		<a class="list-icons-item" data-action="remove"></a>
-	                	</div>
-	            	</div>
-				</div>
-
-			<div class="card-body">
-				
-				<form class="form-inline" role="form" method="POST" action="/validado/cliente">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-					<div class="col-md-offset-0">
-						<button type="submit" name="imprimir" value="imprimir" class="btn btn-default">
-							<img src="/images/imprimir.png" title="imprimir">
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	</div>
-
 </div>
 @endsection

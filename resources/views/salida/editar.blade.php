@@ -134,7 +134,7 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-8 col-centered">
+		<div class="col-md-11 col-centered">
 			<div class="card border-success-400">
 				<div class="card-header header-elements-inline bg-dark">
 					<h6 class="card-title">Editar Venta</h6>
