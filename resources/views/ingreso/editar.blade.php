@@ -29,7 +29,7 @@
 					if(moneda=="DOLAR")
 						$('#pagop_monto').val((monto*pagop_tipcambio).toFixed(2));
 					else
-						$('#pagop_monto').val((monto).toFixed(2));
+						$('#pagop_monto').val((monto/pago_tipcambio).toFixed(2));
 				}
 				else
 				{

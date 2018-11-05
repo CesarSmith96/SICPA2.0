@@ -8,7 +8,6 @@
 .content {
     background-image: url("{{asset('assets/img/textura.jpg')}}");
 }
-
 </style>
 @endsection
 @section('javascript')
@@ -38,7 +37,9 @@
           	});
 			
       });
-
+</script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
     $(document).ready(function(){
         /**
          * Funcion para añadir una nueva columna en la tabla
@@ -373,8 +374,8 @@
 												</td>
 												<td>
 													<select class="form-control text-uppercase" name="moneda" id="moneda">
-														   <option value="DOLAR">DOLÁR  </option>
-														   <option value="SOLES">SOLES  </option>
+														   <option value="DOLAR">DOLAR</option>
+														   <option value="SOLES">SOLES</option>
 														</select>
 												</td>
 												<td>
