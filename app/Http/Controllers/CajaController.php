@@ -52,9 +52,9 @@ class CajaController extends Controller {
 		$tot_compras=$tot_compras_dolar_sol+$tot_compras_soles;
 
 
-		$tot_ventas_dolar = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->where('t_operacion.tope_id','=','2')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','dolar')->sum('t_comprobante.comp_tot');
+		$tot_ventas_dolar = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->orWhere('t_operacion.tope_id','=','2')->orWhere('t_operacion.tope_id','=','6')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','dolar')->sum('t_comprobante.comp_tot');
 
-		$tot_ventas_soles = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->where('t_operacion.tope_id','=','2')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','soles')->sum('t_comprobante.comp_tot');
+		$tot_ventas_soles = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->orWhere('t_operacion.tope_id','=','2')->orWhere('t_operacion.tope_id','=','6')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','soles')->sum('t_comprobante.comp_tot');
 
 		$ventas_dolar = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','2')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','dolar')->get();
 
