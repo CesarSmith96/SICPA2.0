@@ -15,7 +15,7 @@
 @section('content')
 <div class="content">
 	<div class="row">
-		<div class="col-md-6 col-centered">
+		<div class="col-md-5 col-centered">
 			<div class="card border-success-400">
 
 				<div class="card-header header-elements-inline bg-dark">
@@ -41,7 +41,7 @@
 					<form class="form-horizontal" role="form" method="POST" action="/validacion/registro">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-						
+
 						<div class="form-group">
 							<label class="control-label">Nombre</label>
 							<div>
@@ -83,16 +83,12 @@
 								<input type="text" class="form-control" name="usu_rpta">
 							</div>
 						</div>
-
-						<div class="form-group">
-							<div class="col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Registrarse
-								</button>
-							</div>
-						</div>
-					</form>
 				</div>
+				<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
+				<button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Registrarse<i class="icon-paperplane ml-2"></i></button>
+				</div>
+				</form>
+
 			</div>
 		</div>
 	</div>
