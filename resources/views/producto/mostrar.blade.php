@@ -97,8 +97,7 @@ function getCodigo()
 						@endforeach
 					</ul>
 				</div>
-						@endif
-
+				@endif
 				<form class="form-horizontal" role="form" method="POST" action="/validado/producto/crear">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 

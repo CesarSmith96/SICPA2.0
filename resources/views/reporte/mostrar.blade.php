@@ -287,7 +287,7 @@
 							</div>
 						</div>
 						
-						<div class="tab-pane fade active show" id="ventas">
+						<div class="tab-pane fade" id="ventas">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 									<h6 class="card-title">DETALLE DE VENTAS</h6>
@@ -440,7 +440,7 @@
 							</div>
 						</div>
 
-						<div class="tab-pane fade active show" id="gastos">
+						<div class="tab-pane fade" id="gastos">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 									<h6 class="card-title">GASTOS</h6>
@@ -549,7 +549,7 @@
 							</div>
 						</div>
 
-						<div class="tab-pane fade active show" id="creditos">
+						<div class="tab-pane fade" id="creditos">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 								<h6 class="card-title">CRÉDITOS</h6>
@@ -575,7 +575,7 @@
 							</div>
 						</div>
 
-						<div class="tab-pane fade active show" id="resumen">
+						<div class="tab-pane fade" id="resumen">
 							<div class="card border-success-400">
 								<div class="card-header header-elements-inline bg-dark">
 									<h6 class="card-title">RESUMEN</h6>
