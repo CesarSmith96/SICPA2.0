@@ -1,103 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
 
- <div class="navbar navbar-expand-xl navbar-dark bg-teal navbar-component rounded" style="z-index: 30;">
-	<div class="navbar-brand">
-		<a href="index.html" class="d-inline-block">
-			<img src="../../../../global_assets/images/logo_light.png" alt="">
-		</a>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>SICPA</title>
+
+	<!-- Global stylesheets -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="{{asset('global_assets/css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/css/bootstrap_limitless.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/css/layout.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/css/components.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/css/colors.min.css')}}" rel="stylesheet" type="text/css">
+	@yield('css')
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script src="{{asset('global_assets/js/main/jquery.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/main/bootstrap.bundle.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/loaders/blockui.min.js')}}"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script src="{{asset('global_assets/js/plugins/visualization/d3/d3.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/visualization/d3/d3_tooltip.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/forms/styling/switchery.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/forms/selects/bootstrap_multiselect.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/ui/moment/moment.min.js')}}"></script>
+
+	<script src="{{asset('assets/js/app.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/forms/styling/uniform.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/forms/styling/switchery.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/ui/moment/moment.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/forms/selects/select2.full.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/demo_pages/content_page_header.js')}}"></script>
+	<script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+	<script src="{{asset('global_assets/js/demo_pages/datatables_basic.js')}}"></script>
+	<script src="{{asset('global_assets/js/demo_pages/extra_fab.js')}}"></script>
+
+	<script src="{{asset('global_assets/js/sgp/zelect.js')}}"></script>
+
+	<!-- /theme JS files -->
+	@yield('javascript')
+</head>
+
+<body>
+
+	<!-- Main navbar -->
+	<div class="navbar navbar-expand-xl navbar-dark bg-dark navbar-component mb-0">
+		<div class="navbar-brand">
+			<a href="index.html" class="d-inline-block">
+				<img src="/images/logo.jpg" alt="">
+			</a>
+		</div>
+
+		<div class="d-xl-none">
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-nav-lists">
+				<i class="icon-menu"></i>
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-nav-lists">
+			<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+					<a href="/validacion/inicio" class="navbar-nav-link" aria-expanded="false">Iniciar Sesión</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+					<a href="/validacion/registro" class="navbar-nav-link" aria-expanded="false">Registrarse</a>
+				</li>
+			</ul>
+		</div>
 	</div>
+	<!-- /main navbar -->
 
-	<div class="d-xl-none">
-		<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-mixed">
-			<i class="icon-menu"></i>
-		</button>
-	</div>
 
-	<div class="navbar-collapse collapse" id="navbar-mixed">
-		<ul class="navbar-nav">
-			<li class="nav-item mega-menu-full show">
-				<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Menu</a>
+	<!-- Page content -->
+	<div class="page-content">
 
-				<div class="dropdown-menu dropdown-content show">
-					<div class="dropdown-content-body">
-						<div class="row">
-							<div class="col-xl-2">
-								<div class="dropdown-header font-weight-semibold text-uppercase text-default p-0">Mantenimientos</div>
-								<div class="dropdown-divider mb-2"></div>
-								<div class="mb-3 mb-xl-0">
-									<a href="/validado/almacen"" class="dropdown-item rounded">Almacen</a>
-									<a href="/validado/familia" class="dropdown-item rounded">Familias de Producto</a>
-									<a href="/validado/categoria" class="dropdown-item rounded">Categorías de Producto</a>
-									<a href="/validado/unidadmedida" class="dropdown-item rounded">Unidades de Medida</a>
-									<a href="/validado/conversion" class="dropdown-item rounded">Conversiones</a>
-									<a href="/validado/tipogasto" class="dropdown-item rounded">Tipo de Gasto</a>
-									<a href="/validado/tipocc" class="dropdown-item rounded">Centro de Costo</a>
+		<!-- Main content -->
+		<div class="content-wrapper">
 
-								</div>
-							</div>
-							<div class="col-xl-2">
-								<div class="dropdown-header font-weight-semibold text-uppercase text-default p-0">UI components</div>
-								<div class="dropdown-divider mb-2"></div>
-								<div class="mb-3 mb-xl-0">
-									<a href="/validado/producto" class="dropdown-item rounded">Productos </a>
-									<a href="/validado/unidadproducto" class="dropdown-item rounded">Unidades de Medida por Producto</a>
-									<a href="/validado/cliente" class="dropdown-item rounded">Clientes</a>
-									<a href="/validado/proveedor" class="dropdown-item rounded">Proveedores</a>
-									<a href="/validado/vendedor" class="dropdown-item rounded">Vendedores</a>
-									<a href="/validado/inventario" class="dropdown-item rounded">Inventario</a>
-									<a href="/validado/inventario" class="dropdown-item rounded">Inventario</a>
-								</div>
-							</div>
-							<div class="col-xl-2">
-								<div class="dropdown-header font-weight-semibold text-uppercase text-default p-0">Operaciones</div>
-								<div class="dropdown-divider mb-2"></div>
-								<div class="mb-3 mb-xl-0">
-									<a href="/validado/ingreso" class="dropdown-item rounded">Compras</a>
-									<a href="/validado/salida" class="dropdown-item rounded">Ventas</a>
-									<a href="/validado/notacreditoemitida" class="dropdown-item rounded">Notas de Credito Emitidas</a>
-									<a href="/validado/notacreditorecibida" class="dropdown-item rounded">Notas de Credito Recibidas</a>
-									<a href="/validado/guiaremisionemitida" class="dropdown-item rounded">Guías de Remisión Emitidas</a>
-								</div>
-							</div>
-							<div class="col-xl-2">
-								<div class="dropdown-header font-weight-semibold text-uppercase text-default p-0">Navigation</div>
-								<div class="dropdown-divider mb-2"></div>
-								<div class="mb-3 mb-xl-0">
-									<a href="/validado/npedido" class="dropdown-item rounded">Nota de Pedido</a>
-									<a href="/validado/salidaexterno" class="dropdown-item rounded">Gastos</a>
-									<a href="/validado/notacredito" class="dropdown-item rounded">Notas de Credito</a>
-									<a href="/validado/caja" class="dropdown-item rounded">Caja</a>
-									<a href="/validado/caja" class="dropdown-item rounded">Caja</a>
-								</div>
-							</div>
-							<div class="col-xl-2">
-								<div class="dropdown-header font-weight-semibold text-uppercase text-default p-0">Reportes</div>
-								<div class="dropdown-divider mb-2"></div>
-								<div class="mb-3 mb-xl-0">
-									<a href="/validado/reporte" class="dropdown-item rounded">Reportes</a>
-								</div>
-							</div>
-						</div>
-					</div>
+			<!-- Content area -->
+			
+			@yield('content')
+			
+			<!-- /content area -->
+
+
+			<!-- Footer -->
+			<div class="navbar navbar-expand-lg navbar-light">
+				<div class="text-center d-lg-none w-100">
+					<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+						<i class="icon-unfold mr-2"></i>
+						Footer
+					</button>
 				</div>
-			</li>
-		</ul>
 
-		<ul class="navbar-nav ml-xl-auto">
-			<li class="nav-item dropdown dropdown-user">
-				<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
-					<img src="../../../../global_assets/images/demo/users/face11.jpg" class="rounded-circle" alt="">
-					<span>Victoria</span>
-				</a>
+				<div class="navbar-collapse collapse" id="navbar-footer">
+					<span class="navbar-text">
+						&copy; 2018 <a href="https://www.binarioconsultores.com" target="_blank">Binario Consultores</a>
+					</span>
 
-				<div class="dropdown-menu dropdown-menu-right">
-					<a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-					<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-					<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
-					<a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+					<ul class="navbar-nav ml-lg-auto">
+						<li class="nav-item"><a href="https://kopyov.ticksy.com/" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Support</a></li>
+						<li class="nav-item"><a href="http://demo.interface.club/limitless/docs/" class="navbar-nav-link" target="_blank"><i class="icon-file-text2 mr-2"></i> Docs</a></li>
+						<li class="nav-item"><a href="https://themeforest.net/item/limitless-responsive-web-application-kit/13080328?ref=kopyov" class="navbar-nav-link font-weight-semibold"><span class="text-pink-400"><i class="icon-cart2 mr-2"></i> Purchase</span></a></li>
+					</ul>
 				</div>
-			</li>
-		</ul>
+			</div>
+			<!-- /footer -->
+
+		</div>
+		<!-- /main content -->
+
 	</div>
-</div>
+	<!-- /page content -->
+
+</body>
+
+@yield('javascriptfinal')
+</html>
