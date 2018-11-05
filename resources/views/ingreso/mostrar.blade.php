@@ -133,15 +133,16 @@
 							<td class="text-center">
 								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
 								<div class='dropdown-menu dropdown-menu-right'>
-									<a href="/validado/detalleingreso?comp_id={{$comprobante->comp_id}}"><img src="/images/detalle.png" title="VER DETALLE"></a>
-									<a href="/validado/ingreso/editar?comp_id={{$comprobante->comp_id}}"><img src="/images/editar.png" title="EDITAR"></a>
-									<a href="/validado/ingreso/eliminar?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
+									<a class="btn btn-primary dropdown-item" ="/validado/detalleingreso?comp_id={{$comprobante->comp_id}}"><img src="/images/detalle.png" title="VER DETALLE">VER DETALLE</a>
+									<a class="btn btn-primary dropdown-item" href="/validado/ingreso/editar?comp_id={{$comprobante->comp_id}}"><img src="/images/editar.png" title="EDITAR">EDITAR</a>
+									<a class="btn btn-primary dropdown-item" href="/validado/ingreso/eliminar?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR">ELIMINAR</a>
 
 									@if($comprobante->comp_doc!='')
-										<a target="_blank" href="/img/{{$comprobante->comp_doc}}"><img src="/images/pdf.png" title="VER ARCHIVO"></a>
+										<a target="_blank" class="btn btn-primary dropdown-item" href="/img/{{$comprobante->comp_doc}}"><img src="/images/pdf.png" title="VER ARCHIVO">VER ARCHIVO</a>
 									@endif
 									@if($comprobante->comp_est!='ANULADO')
-										<a href="/validado/ingreso/sanular?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular?')"><img src="/images/anular.png" title="ANULAR"></a>
+										<a class="btn btn-primary dropdown-item" href="/validado/ingreso/sanular?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular?')"><img src="/images/anular.png" title="ANULAR">ANULAR</a>
+										<a class="btn btn-primary dropdown-item" href="/validado/ndebito/crear?comp_id={{$comprobante->comp_id}}""><img src="/images/ncredito.png" title="NOTA DE DÉBITO">NOTA DE DÉBITO</a>
 										<!--<a href="/validado/notacredito/crear?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular con NOTA DE CRÉDITO?')"><img src="/images/ncredito.png" title="ANULAR CON NOTA DE CRÉDITO"></a>
 										<a href="/validado/notacredito/seleccionar?comp_id={{$comprobante->comp_id}}"><img src="/images/asignarnc.png" title="PAGAR CON NOTA DE CRÉDITO"></a>-->
 									@endif

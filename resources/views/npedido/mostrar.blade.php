@@ -130,15 +130,15 @@
 							<td class="text-center">
 								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
 								<div class='dropdown-menu dropdown-menu-right'>
-									<a href="/validado/detallenpedido?ocv_id={{$ordencv->ocv_id}}"><img src="/images/detalle.png" title="VER DETALLE"></a>
-									<a href="/validado/npedido/editar?ocv_id={{$ordencv->ocv_id}}"><img src="/images/editar.png" title="EDITAR"></a>
-									<a href="/validado/npedido/eliminar?ocv_id={{$ordencv->ocv_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
+									<a class="btn btn-primary dropdown-item" href="/validado/detallenpedido?ocv_id={{$ordencv->ocv_id}}"><img src="/images/detalle.png" title="VER DETALLE">VER DETALLE</a>
+									<a class="btn btn-primary dropdown-item" href="/validado/npedido/editar?ocv_id={{$ordencv->ocv_id}}"><img src="/images/editar.png" title="EDITAR">EDITAR</a>
+									<a class="btn btn-primary dropdown-item" href="/validado/npedido/eliminar?ocv_id={{$ordencv->ocv_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR">ELIMINAR</a>
 									
 									@if($ordencv->ocv_doc!='')
-										<a target="_blank" href="/img/{{$ordencv->ocv_doc}}"><img src="/images/pdf.png" title="VER ARCHIVO"></a>
+										<a class="btn btn-primary dropdown-item" target="_blank" href="/img/{{$ordencv->ocv_doc}}"><img src="/images/pdf.png" title="VER ARCHIVO">VER ARCHIVO</a>
 									@endif
 									@if($ordencv->ocv_est=='ACTIVO')
-										<a href="/validado/npedido/asignar?ocv_id={{$ordencv->ocv_id}}"><img src="/images/asignar.png" title="ASIGNAR COMPROBANTE"></a>
+										<a class="btn btn-primary dropdown-item" href="/validado/npedido/asignar?ocv_id={{$ordencv->ocv_id}}"><img src="/images/asignar.png" title="ASIGNAR COMPROBANTE">ASIGNAR COMPROBANTE</a>
 									@endif
 								</div>
 							</td>

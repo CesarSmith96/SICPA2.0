@@ -344,6 +344,7 @@
 						<input type="hidden" name="comp_subt" value="0">
 						<input type="hidden" name="comp_igv" value="0">
 						<input type="hidden" name="comp_saldo" value="0">
+						<input type="hidden" name="comp_descrip" value="0">
 				</div>
 				<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
 					<a href="/validado/ndebito" class="btn bg-transparent text-white border-white border-2">Cancelar</a>

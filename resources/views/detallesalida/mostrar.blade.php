@@ -87,6 +87,7 @@
 				<br/><br/>
 
 				<table class="table table-bordered table-hover datatable-basic table-xs">
+					<thead>
 						<tr>
 							<th>Cantidad</th>
 							<th>Unidad</th>
@@ -95,6 +96,7 @@
 							<th width="130">Precio Total</th>
 							<th>Acciones</th>
 						</tr>
+					</thead>
 				
 				@if(sizeof($detallecomprobantes)>0)
 					
