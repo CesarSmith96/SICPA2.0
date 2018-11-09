@@ -51,13 +51,6 @@
 
 			<ul class="fab-menu-inner">
 				<li>
-					<div data-fab-label="Agregar">
-						<a href="/validado/notacreditorecibida/crear" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
-							<i class="icon-plus3"></i>
-						</a>
-					</div>
-				</li>
-				<li>
 					<div data-fab-label="Imprimir">
 						<form class="form-inline" role="form" method="POST" action="/validado/notacreditorecibida">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">

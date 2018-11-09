@@ -36,9 +36,9 @@ class CajaController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$tot_compras_dolar = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->orWhere('t_operacion.tope_id','=','1')->orWhere('t_operacion.tope_id','=','9')->orWhere('t_operacion.tope_id','=','8')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','dolar')->sum('t_comprobante.comp_tot');
+		$tot_compras_dolar = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->orWhere('t_operacion.tope_id','=','1')->orWhere('t_operacion.tope_id','=','9')->orWhere('t_operacion.tope_id','=','8')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','DOLAR')->sum('t_comprobante.comp_tot');
 
-		$tot_compras_soles = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->orWhere('t_operacion.tope_id','=','1')->orwhere('t_operacion.tope_id','=','9')->orWhere('t_operacion.tope_id','=','8')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','soles')->sum('t_comprobante.comp_tot');
+		$tot_compras_soles = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->orWhere('t_operacion.tope_id','=','1')->orWhere('t_operacion.tope_id','=','9')->orWhere('t_operacion.tope_id','=','8')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','soles')->sum('t_comprobante.comp_tot');
 
 		$compras_dolar = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','1')->where('t_comprobante.comp_id','<>','1')->where('comp_est','=','ACTIVO')->where('comp_moneda','=','dolar')->get();
 

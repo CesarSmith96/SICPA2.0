@@ -29,7 +29,7 @@
 					if(moneda=="DOLAR")
 						$('#pagop_monto').val((monto*pagop_tipcambio).toFixed(2));
 					else
-						$('#pagop_monto').val((monto/pago_tipcambio).toFixed(2));
+						$('#pagop_monto').val((monto*1).toFixed(2));
 				}
 				else
 				{
@@ -266,10 +266,10 @@
 												<option selected >AL CREDITO</option>
 												<option >Otro</option>
 											@elseif($comprobante->comp_cond=='OTRO')
-											<option >AL CONTADO</option>
-											<option >MUESTRA GRATUITA</option>
-											<option >AL CREDITO</option>
-											<option selected>Otro</option>
+												<option >AL CONTADO</option>
+												<option >MUESTRA GRATUITA</option>
+												<option >AL CREDITO</option>
+												<option selected>Otro</option>
 											@endif
 										</select>	
 									</div>

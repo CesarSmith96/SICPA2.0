@@ -260,7 +260,7 @@
 							<td class="text-center">
 								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
 								<div class='dropdown-menu dropdown-menu-right'>
-									<a class="btn btn-primary dropdown-item" ="/validado/detalleingreso?comp_id={{$comprobante->comp_id}}"><img src="/images/detalle.png" title="VER DETALLE">VER DETALLE</a>
+									<a class="btn btn-primary dropdown-item" href=/validado/detalleingreso?comp_id={{$comprobante->comp_id}}"><img src="/images/detalle.png" title="VER DETALLE">VER DETALLE</a>
 									<a class="btn btn-primary dropdown-item" href="/validado/ingreso/editar?comp_id={{$comprobante->comp_id}}"><img src="/images/editar.png" title="EDITAR">EDITAR</a>
 									<a class="btn btn-primary dropdown-item" href="/validado/ingreso/eliminar?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR">ELIMINAR</a>
 
