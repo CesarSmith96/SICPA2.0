@@ -86,6 +86,7 @@
 </script>
 <script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
 <script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+
 <script type="text/javascript">
       $(document).ready(function () {
           	$('#comp_nro').keyup(function () {
@@ -98,6 +99,7 @@
 			
       });
 </script>
+
 <script type="text/javascript">
       $(document).ready(function () {
           	$('#comp_ref').keyup(function () {
@@ -179,13 +181,14 @@
 	}
 </script>
 @endsection
+
 @section('content')
 <div class="content">
 	<div class="row">
 		<div class="col-md-8 col-centered">
 			<div class="card border-success-400">
 				<div class="card-header header-elements-inline bg-dark">
-					<h6 class="card-title">Nueva Nota de Crédito</h6>
+					<h6 class="card-title">Nueva Nota de Débito</h6>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
@@ -204,17 +207,17 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/validado/notacreditorecibida/crear" enctype="multipart/form-data">
+					<form class="form-horizontal" role="form" method="POST" action="/validado/ndebitor/crear" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="comp_est" value="ACTIVO" >
 						<input type="hidden" name="comp_ref_id" id="comp_ref_id" value='{{$comprobante->comp_id}}' >
-						<input type="hidden" name="tcomp_id" value="3"  > <!-- 3 es nota de credito-->
+						<input type="hidden" name="tcomp_id" value="4"> 
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Nro</label>
 									<div>
-										<input type="text" class="form-control text-uppercase" name="comp_nro" id="comp_nro"  value="{{ old('comp_nro') }}">
+										<input type="text" class="form-control text-uppercase" name="comp_nro"   value="{{ old('comp_nro') }}">
 									</div>
 									<input type="text" id="label" style="border-width:0;font-size: 15px; color:red" readonly="readonly">
 								</div>
@@ -235,22 +238,12 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Descripción</label>
-									<div>
-										<input type="text" class="form-control text-uppercase" name="comp_descrip" id="comp_descrip" value="{{$comprobante->comp_descrip}}">
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
 									<label class="control-label">Nro</label>
 									<div>
 										<input type="text" class="form-control text-uppercase" name="comp_ref" id="comp_ref"  value="{{$comprobante->comp_nro}}">
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Cliente</label>
@@ -259,6 +252,8 @@
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Tipo Comprobante</label>
@@ -267,8 +262,30 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">Condición</label>
+									<div>
+										<select class="form-control text-uppercase" name="comp_cond" onchange="getcondicion(this)">
+												<option >AL CONTADO</option>
+												<option >AL CREDITO</option>
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">Moneda</label>
+									<div>
+										<select class="form-control text-uppercase" name="comp_moneda" onchange="getvaltipmon(this)">
+										   <option value="DOLAR">DOLÁR AMERICANO</option>
+										   <option value="SOLES">SOLES</option>
+										</select>
+									</div>
+								</div>
+							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">F. Emisión de NC</label>
@@ -277,6 +294,8 @@
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">F. de Vencimiento</label>
@@ -285,8 +304,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Vendedor</label>
@@ -299,29 +316,21 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="control-label">Moneda</label>
-									<div>
-										<input type="text" disabled="" class="form-control text-uppercase" name="comp_moneda" id="comp_moneda" value="{{$comprobante->comp_moneda}}">
-									</div>
-								</div>
-							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Tipo de Cambio</label>
 									<div>
-										<input type="text" disabled="" class="form-control text-uppercase" name="comp_tipcambio" id="comp_tipcambio" value="{{$comprobante->comp_tipcambio}}">
+										<input type="text"  class="form-control text-uppercase" name="comp_tipcambio" id="comp_tipcambio" value="{{$comprobante->comp_tipcambio}}">
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Descuento</label>
+									<label class="control-label">Monto</label>
 									<div>
-										<input type="text" disabled="" class="form-control text-uppercase" name="comp_monto" id="comp_monto">
+										<input type="number"  class="form-control" name="comp_tot" id="comp_tot">
 									</div>
 								</div>
 							</div>
@@ -332,23 +341,16 @@
 								<input type="text" class="form-control text-uppercase" name="comp_obs" value="{{ old('comp_obs') }}">
 							</div>
 						</div>
-						<div class="form-group">
-				            <label class="control-label">Archivo</label>
-				            <div>
-				                <input type="file" name="comp_doc" >
-				            </div>
-				        </div>
-
 						<input type="hidden" name="comp_subt" value="0">
 						<input type="hidden" name="comp_igv" value="0">
-						<input type="hidden" name="comp_tot" value="0">
 						<input type="hidden" name="comp_saldo" value="0">
+						<input type="hidden" name="comp_descrip" value="0">
 				</div>
 				<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
-				<a href="/validado/notacreditorecibida" class="btn bg-transparent text-white border-white border-2">Cancelar</a>
-				<button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Crear y Añadir Detalle<i class="icon-paperplane ml-2"></i></button>
+					<a href="/validado/ndebitor" class="btn bg-transparent text-white border-white border-2">Cancelar</a>
+					<button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Crear y Añadir Detalle <i class="icon-paperplane ml-2"></i></button>
 				</div>
-				</form>
+			</form>
 			</div>
 		</div>
 	</div>

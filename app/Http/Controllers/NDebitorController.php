@@ -1,23 +1,25 @@
 <?php namespace SICPA\Http\Controllers;
 
+use SICPA\NotaCredito;
+use SICPA\CompraNCredito;
 use SICPA\Comprobante;
 use SICPA\DetalleComprobante;
 use SICPA\Operacion;
 use SICPA\TipoComprobante;
+use SICPA\TipoComprobanteInc;
+use SICPA\TipoOperacion;
 use SICPA\Entidad;
 use SICPA\Producto;
 use SICPA\Inventario;
-use SICPA\Vendedor;
 use SICPA\Conversion;
-use SICPA\TipoComprobanteInc;
-use Illuminate\Http\Request;
+use SICPA\Vendedor;
 use SICPA\Http\Requests\CrearNotaCreditoEmitidaRequest;
 use SICPA\Http\Requests\EditarNotaCreditoEmitidaRequest;
-use Illuminate\Database;
+use SICPA\Http\Requests\EditarNotaDebitoEmitidaRequest;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Input;
 
-class NotaCreditoEmitidaController extends Controller {
+class NDebitorController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -47,11 +49,13 @@ class NotaCreditoEmitidaController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','5')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
+
+		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','9')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get(); // tipo cliente
-		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get(); // 3 Nota de Credito
-		return view('notacreditoemitida.mostrar',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
+		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',4)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get(); 
+		// 4 Nota de Debito
+		return view('ndebitor.mostrar',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 	}
 
 	public function postIndex(Request $request)
@@ -109,7 +113,7 @@ class NotaCreditoEmitidaController extends Controller {
 		$comprobantes=$comprobantes->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get(); // tipo cliente
 		//$tipocomprobantes = TipoComprobante::all();
-		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
+		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',4)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
 
 		if(Input::get('exportarxls'))
@@ -120,20 +124,22 @@ class NotaCreditoEmitidaController extends Controller {
 
 	public function getCrear(Request $request)
 	{
+		
 		$comp_id=$request->get('comp_id');
 		$comprobante = Comprobante::find($comp_id);
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get(); // tipo cliente
-		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
+
+		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',4)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
-		return view('notacreditoemitida.crear',['tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores,'comprobante'=>$comprobante]);
+		return view('ndebitor.crear',['tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores,'comprobante'=> $comprobante]);
 		
 	}
 
 	public function postCrear(CrearNotaCreditoEmitidaRequest $request)
 	{
-
 		$tcompinc_id = strtoupper($request->get('tcompinc_id'));
 		$comp_ref_id = strtoupper($request->get('comp_ref_id'));
+
 		$comp_referencia= Comprobante::find($comp_ref_id);
 
 
@@ -151,160 +157,52 @@ class NotaCreditoEmitidaController extends Controller {
 				//'comp_cond' => strtoupper($request->get('comp_cond')),	
 				'comp_tipcambio' => $comp_referencia->comp_tipcambio,
 				'comp_moneda' => $comp_referencia->comp_moneda,
-				'tcomp_id' => 3, // tipo notacredito
+				'tcomp_id' => 4, // tipo notadebito
 				'tcompinc_id' => strtoupper($request->get('tcompinc_id')),
 				'ent_id' => $comp_referencia->entidad->ent_id,
 				'vend_id' => strtoupper($request->get('vend_id')),
+				'comp_est' => strtoupper($request->get('comp_est')),
+				'comp_cond' => strtoupper($request->get('comp_cond')),
 				
 				//'comp_fpago' => strtoupper($request->get('comp_fpago')),
 				//'comp_banco' => strtoupper($request->get('comp_banco')),
 				//'comp_nope' => strtoupper($request->get('comp_nope')),
 				//'comp_np' => strtoupper($request->get('comp_np')),
-				'comp_descrip' => ($request->get('comp_descrip')),
+				
 				'comp_ref' => $comp_ref_id,
 				'comp_obs' => strtoupper($request->get('comp_obs')),
 				'comp_fven' => strtoupper($request->get('comp_fven')),
-				'comp_subt' => strtoupper($request->get('comp_monto')),
-				'comp_tot' => strtoupper($request->get('comp_monto'))
+				'comp_subt' => strtoupper($request->get('comp_subt')),
+				'comp_tot' => strtoupper($request->get('comp_tot'))
 			]
 		)->comp_id;
-
-		//$comprobante=Comprobante::find($comp_id);
-		/*if($request->get('comp_cond')=="AL CREDITO")
-		{
-			$comprobante->comp_fven=$request->get('comp_fven');
-			$comprobante->save();
-		}*/
-		$comprobante=Comprobante::find($comp_id);
-
-		$file = $request->file('comp_doc');
-		if($file)
-		{
-			$ruta='\img';
-			$nombre= $comp_id.'.'.$file->guessExtension();
-			$file->move(getcwd().$ruta,$nombre);
-			$comprobante->comp_doc=$nombre;
-			$comprobante->save();
-		}	
-
 		Operacion::create
 		(
 			[
-				'tope_id' => 5, ///// tipo operacion guia remision
+				'tope_id' => 9, ///// tipo operacion nota de credito recibida
 				'comp_id' => $comp_id,
 				'ie_id' => 1 ///// para ie RESGUARDO
 			]
 		);
 
-		$tcompinc_cod=TipoComprobanteInc::find($tcompinc_id)->tcompinc_cod;
-		$comprobante=Comprobante::find($comp_id);
-		
-		if($tcompinc_cod=='01' || $tcompinc_cod=='02' || $tcompinc_cod=='06')
-		{
-			$detallecomprobantes=DetalleComprobante::where('comp_id',$comp_ref_id)->get();
-			foreach ($detallecomprobantes as $detallecomprobante) {
-				DetalleComprobante::create
-				(
-					[
-						'dcomp_cant'=> $detallecomprobante->dcomp_cant,
-						'dcomp_prec'=> $detallecomprobante->dcomp_prec,
-						'comp_id'=> $comp_id,
-						'up_id'=> $detallecomprobante->up_id
-					]
-				);
+		return redirect("/validado/ndebitor")->with('creado','Nota de Débito Recibida creada');
 
-				///////////////////////// EDITANDO INVENTARIO ///////////////////////////////////////////////////
-
-				$inventario=Inventario::where('prod_id',$detallecomprobante->unidadproducto->prod_id)->get();
-
-				$inv_id=$inventario[0]->inv_id;	
-
-				$inventario=Inventario::find($inv_id);
-
-				$um_producto=Producto::find($detallecomprobante->unidadproducto->prod_id)->um_id;
-				$um_detalle=$detallecomprobante->unidadproducto->um_id;
-				$cantidad=$detallecomprobante->dcomp_cant;
-				$cantidad_ant=$inventario->inv_cant;
-
-
-				if ($um_producto != $um_detalle) {
-					if((Conversion::where('um_id1',$um_producto)->where('um_id2',$um_detalle)->count())>(Conversion::where('um_id2',$um_producto)->where('um_id1',$um_detalle)->count()))
-					{
-						$conversion=Conversion::where('um_id1',$um_producto)->where('um_id2',$um_detalle)->get();
-						$factor=$conversion[0]->conv_fact;
-						$cantidad= ($cantidad/$factor);
-					}
-					else
-					{
-						$conversion=Conversion::where('um_id2',$um_producto)->where('um_id1',$um_detalle)->get();
-						$factor=$conversion[0]->conv_fact;
-						$cantidad= ($cantidad*$factor);
-					}
-				}
-
-				$inventario->inv_cant=$cantidad_ant + $cantidad;
-				$inventario->inv_fecha=Carbon::now();
-				$inventario->save();
-
-				///////////////////////////////////
-			}
-
-			$comprobante->comp_subt = $comp_referencia->comp_subt;
-			$comprobante->comp_igv = $comp_referencia->comp_igv;
-			$comprobante->comp_tot = $comp_referencia->comp_tot;
-			$comprobante->comp_saldo = $comp_referencia->comp_saldo;
-			$comprobante->save();
-
-			if($tcompinc_cod=='01' || $tcompinc_cod=='02')
-			{
-				$comprobanteref=Comprobante::find($comp_ref_id);
-				$comprobanteref->comp_est="ANULADO";
-				$comprobanteref->save();
-			}
-
-
-			return redirect("/validado/detallenotacreditoemitida?comp_id={$comp_id}")->with('creado','Nota de Crédito creada');
-		}
-		else
-		{
-			if ($tcompinc_cod=='03')
-				return redirect("/validado/notacreditoemitida")->with('creado','Nota de Crédito creada');
-			else
-			{
-				if ($tcompinc_cod=='07') 
-				{
-					return redirect("/validado/detallenotacreditoemitida?comp_id={$comp_id}")->with('creado','Nota de Crédito creada');
-				}
-				else
-				{
-					if ($tcompinc_cod=='04')
-						return redirect("/validado/notacreditoemitida")->with('creado','Nota de Crédito creada');
-					else{}
-				}
-			}
-		}
-
-		//return view('salida.crear',['comp_id'=> $comp_id,'creado' 'Comprobante creado']);
-
-		/*$detallecomprobantes = DetalleComprobante::where('comp_id',$comp_id)->get();
-		$comprobante = Comprobante::find($comp_id);
-		return view('detallesalida.mostrar',['detallecomprobantes'=> $detallecomprobantes,'comprobante'=>$comprobante]);*/
-		
-		//return redirect("/validado/detallenotacreditoemitida?comp_id={$comp_id}")->with('creado','Nota de Crédito creada');
 	}
-
-
 	public function getEditar(Request $request)
 	{
 		$this->validate($request,['comp_id'=>'required']);
 		$comp_id=$request->get('comp_id');
-		$comprobante = Comprobante::find($comp_id);
-		$comprobante_ref = Comprobante::find($comprobante->comp_ref);
-		$entidades = Entidad::where('tent_id','1')->orderBy('ent_rz','asc')->get();
-		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
-		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
 
-		return view('notacreditoemitida.editar',['comprobante'=>$comprobante,'comprobante_ref'=>$comprobante_ref,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=>$entidades,'vendedores'=> $vendedores]);
+		$comprobante = Comprobante::find($comp_id);
+
+		$comprobante_ref = Comprobante::find($comprobante->comp_ref);
+		
+		$entidades = Entidad::where('tent_id','1')->orderBy('ent_rz','asc')->get();
+		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',4)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
+		
+		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
+		
+		return view('ndebitor.editar',['comprobante'=>$comprobante,'comprobante_ref'=> $comprobante_ref,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=>$entidades,'vendedores'=> $vendedores]);
 
 	}
 
@@ -320,14 +218,17 @@ class NotaCreditoEmitidaController extends Controller {
 		$comp_fecha = strtoupper($request->get('comp_fecha'));	
 		$comp_tipcambio = $comp_referencia->comp_tipcambio;
 		$comp_moneda = $comp_referencia->comp_moneda;
-		$tcomp_id = '3';
+		$tcomp_id = '4';
 		$tcompinc_id = strtoupper($request->get('tcompinc_id'));
-		$ent_id = $comp_referencia->entidad->ent_id;		
+		$comp_tot = strtoupper($request->get('comp_tot'));
+		$ent_id = $comp_referencia->entidad->ent_id;	
 		$vend_id = strtoupper($request->get('vend_id'));
 		$comp_obs = strtoupper($request->get('comp_obs'));
 		$comp_descrip = strtoupper($request->get('comp_descrip'));
 		$comp_ref = $comp_ref_id;
 		$comp_fven = strtoupper($request->get('comp_fven'));
+		$comp_est = strtoupper($request->get('comp_est'));
+		$comp_cond = strtoupper($request->get('comp_cond'));
 		$comprobante = Comprobante::find($comp_id);
 
 
@@ -336,26 +237,20 @@ class NotaCreditoEmitidaController extends Controller {
 		$comprobante->comp_tipcambio=$comp_tipcambio;
 		$comprobante->comp_moneda=$comp_moneda;
 		$comprobante->tcomp_id=$tcomp_id;
+		$comprobante->comp_tot=$comp_tot;
 		$comprobante->tcompinc_id=$tcompinc_id;
 		$comprobante->ent_id=$ent_id;
 		$comprobante->vend_id=$vend_id;
 		$comprobante->comp_obs=$comp_obs;
 		$comprobante->comp_descrip=$comp_descrip;
+		$comprobante->comp_est=$comp_est;
+		$comprobante->comp_cond=$comp_cond;
 		$comprobante->comp_ref=$comp_ref;
 		$comprobante->comp_fven=$comp_fven;
 		
-		$file = $request->file('comp_doc');
-		if($file)
-		{
-			$ruta='\img';
-			$nombre= $comp_id.'.'.$file->guessExtension();
-			$file->move(getcwd().$ruta,$nombre);
-			$comprobante->comp_doc=$nombre;
-		}
-
 		$comprobante->save();
 
-		return redirect('/validado/notacreditoemitida')->with('actualizado','Comprobante actualizado');
+		return redirect('/validado/ndebitor')->with('actualizado','Comprobante actualizado');
 	}
 
 	public function getEliminar(Request $request)
@@ -395,7 +290,7 @@ class NotaCreditoEmitidaController extends Controller {
 				}
 			}
 
-			$inventario->inv_cant=$cantidad_ant - $cantidad;
+			$inventario->inv_cant=$cantidad_ant + $cantidad;
 			$inventario->inv_fecha=Carbon::now();
 			$inventario->save();
 		
@@ -407,7 +302,7 @@ class NotaCreditoEmitidaController extends Controller {
 
 		Comprobante::find($comp_id)->delete();
 
-		return redirect('/validado/notacreditoemitida')->with('eliminado','Comprobante eliminado');
+		return redirect('/validado/ndebitor')->with('eliminado','Nota de Debito eliminada');
 	}
 
 
@@ -417,3 +312,4 @@ class NotaCreditoEmitidaController extends Controller {
 	}
 
 }
+

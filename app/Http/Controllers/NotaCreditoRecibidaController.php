@@ -47,7 +47,7 @@ class NotaCreditoRecibidaController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','8')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->limit(25)->get();
+		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','8')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get(); // tipo cliente
 		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get(); // 3 Nota de Credito
@@ -118,12 +118,14 @@ class NotaCreditoRecibidaController extends Controller {
 		return view('notacreditorecibida.mostrar',['comprobantes'=> $comprobantes,'tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 	}
 
-	public function getCrear()
+	public function getCrear(Request $request)
 	{
+		$comp_id=$request->get('comp_id');
+		$comprobante = Comprobante::find($comp_id);
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get(); // tipo cliente
 		$tipocomprobanteincs = TipoComprobanteInc::where('tcomp_id',3)->where('tcompinc_cod','<>','05')->where('tcompinc_cod','<>','08')->where('tcompinc_cod','<>','09')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
-		return view('notacreditorecibida.crear',['tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores]);
+		return view('notacreditorecibida.crear',['tipocomprobanteincs'=> $tipocomprobanteincs,'entidades'=> $entidades,'vendedores'=> $vendedores,'comprobante'=>$comprobante]);
 	}
 
 	public function postCrear(CrearNotaCreditoEmitidaRequest $request)

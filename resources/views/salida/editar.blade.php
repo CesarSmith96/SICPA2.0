@@ -342,6 +342,7 @@
 							</div>
 						</div>
 						</br>
+						@if($comprobante->comp_cond=='AL CREDITO')
 						<div class="col-md-12 col-centered">
 							<div class="card border-success-400">
 								<div class="card-body"><strong>HISTORIAL DE PAGOS </strong></br><strong>  -Monto Actual: </strong><div style="display:inline; float:right;">{{$comprobante->comp_tot}}</div></br><strong>  -Saldo Actual: </strong><div style="display:inline; float:right;">{{$comprobante->comp_saldo}}</div></div>
@@ -424,6 +425,7 @@
 								</div>
 							</div>
 						</div>
+						@endif	
 				</div>
 				<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
 				<a href="/validado/salida" class="btn bg-transparent text-white border-white border-2">Cancelar</a>

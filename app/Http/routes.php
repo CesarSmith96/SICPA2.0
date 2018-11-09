@@ -103,7 +103,6 @@ Route::get('/information/create/ajax-state-vercomps',function()
 
     if(Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->where('t_operacion.tope_id','=','2')->where('comp_nro',$comp_nro)->count()>0)
     	return "*Ya existe.";
-
     return " ";
 });
 
@@ -169,6 +168,7 @@ Route::controllers([
 	'validado/reporte'=>'ReporteController',
 	'validado/ocompra'=>'OCompraController',
     'validado/ndebito'=> 'NDebitoController',
+    'validado/ndebitor'=> 'NDebitorController',
 	'validado/detalleocompra'=>'DetalleOCompraController',
 	'validado/npedido'=>'NPedidoController',
 	'validado/detallenpedido'=>'DetalleNPedidoController',

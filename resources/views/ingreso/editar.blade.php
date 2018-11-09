@@ -260,16 +260,16 @@
 												<option selected >MUESTRA GRATUITA</option>
 												<option >AL CREDITO</option>
 												<option >Otro</option>
-											@elseif($comprobante->comp_cond=='CONCESION')
+											@elseif($comprobante->comp_cond=='AL CREDITO')
 												<option >AL CONTADO</option>
 												<option >MUESTRA GRATUITA</option>
 												<option selected >AL CREDITO</option>
 												<option >Otro</option>
-											@else
-										   		<option >AL CONTADO</option>
-												<option >MUESTRA GRATUITA</option>
-												<option >AL CREDITO</option>
-												<option selected >Otro</option>
+											@elseif($comprobante->comp_cond=='OTRO')
+											<option >AL CONTADO</option>
+											<option >MUESTRA GRATUITA</option>
+											<option >AL CREDITO</option>
+											<option selected>Otro</option>
 											@endif
 										</select>	
 									</div>

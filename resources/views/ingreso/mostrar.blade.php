@@ -269,7 +269,8 @@
 									@endif
 									@if($comprobante->comp_est!='ANULADO')
 										<a class="btn btn-primary dropdown-item" href="/validado/ingreso/sanular?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular?')"><img src="/images/anular.png" title="ANULAR">ANULAR</a>
-										<a class="btn btn-primary dropdown-item" href="/validado/ndebito/crear?comp_id={{$comprobante->comp_id}}""><img src="/images/ncredito.png" title="NOTA DE DÉBITO">NOTA DE DÉBITO</a>
+										<a class="btn btn-primary dropdown-item" href="/validado/ndebitor/crear?comp_id={{$comprobante->comp_id}}""><img src="/images/ncredito.png" title="NOTA DE DÉBITO">NOTA DE DÉBITO</a>
+										<a class="btn btn-primary dropdown-item" href="/validado/notacreditorecibida/crear?comp_id={{$comprobante->comp_id}}""><img src="/images/nc.png" title="NOTA DE CREDIO RECIBIDA">NOTA DE CREDIO RECIBIDA</a>
 										<!--<a href="/validado/notacredito/crear?comp_id={{$comprobante->comp_id}}" onclick="return confirm('Esta seguro que desea anular con NOTA DE CRÉDITO?')"><img src="/images/ncredito.png" title="ANULAR CON NOTA DE CRÉDITO"></a>
 										<a href="/validado/notacredito/seleccionar?comp_id={{$comprobante->comp_id}}"><img src="/images/asignarnc.png" title="PAGAR CON NOTA DE CRÉDITO"></a>-->
 									@endif
