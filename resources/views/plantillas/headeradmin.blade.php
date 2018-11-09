@@ -55,7 +55,7 @@
 	<div class="navbar navbar-expand-xl navbar-dark bg-dark navbar-component mb-0">
 		<div class="navbar-brand">
 			<a href="index.html" class="d-inline-block">
-				<img src="../../../../global_assets/images/logo_light.png" alt="">
+				<img src="/images/logo.jpg" alt="">
 			</a>
 		</div>
 
