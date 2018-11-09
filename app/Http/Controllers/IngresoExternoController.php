@@ -41,7 +41,7 @@ class IngresoExternoController extends Controller {
 	public function getIndex()
 	{
 		// tope_id=3 es tipo Ingreso externo
-		$ieexternos = IEExterno::join('t_operacion','t_operacion.ie_id','=','t_ieexterno.ie_id')->select('t_ieexterno.*')->where('t_operacion.tope_id','=','3')->where('t_ieexterno.ie_id','<>','1')->orderBy('ie_fecha','desc')->limit(25)->get();
+		$ieexternos = IEExterno::join('t_operacion','t_operacion.ie_id','=','t_ieexterno.ie_id')->select('t_ieexterno.*')->where('t_operacion.tope_id','=','3')->where('t_ieexterno.ie_id','<>','1')->orderBy('ie_fecha','desc')->get();
 
 		return view('ingresoexterno.mostrar',['ieexternos'=> $ieexternos]);
 	}

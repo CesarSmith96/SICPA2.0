@@ -55,7 +55,7 @@ class IngresoController extends Controller {
 		$tipocomprobantes = TipoComprobante::where('tcomp_id',1)->orwhere('tcomp_id',2)->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->where('vend_tipo','=','VENDEDOR')->get();
 		//$vendedores = Vendedor::orderBy('vend_nom','asc')->get();
-		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','1')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->limit(25)->get();
+		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','1')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
 
 		return view('ingreso.mostrar',['comprobantes'=> $comprobantes,'tipocomprobantes'=> $tipocomprobantes,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 	}

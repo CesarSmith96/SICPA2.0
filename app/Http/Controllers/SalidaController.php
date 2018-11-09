@@ -47,7 +47,7 @@ class SalidaController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','2')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->limit(50)->get();
+		$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','2')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->where('vend_tipo','=','VENDEDOR')->get();
 		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get(); // tipo cliente
 		$tipocomprobantes = TipoComprobante::where('tcomp_id',1)->orwhere('tcomp_id',2)->get();
