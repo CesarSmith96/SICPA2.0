@@ -60,7 +60,7 @@ class AlmacenController extends Controller {
 		$alm_id=$request->get('alm_id');
 		$almacen = Almacen::find($alm_id);
 
-		return $almacen;
+		return view('almacen.editar',['almacen'=>$almacen]);
 
 	}
 

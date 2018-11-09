@@ -13,12 +13,7 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-	
-$( document ).ready(function() {
-	@if (count($errors) > 0)
-		$('#editarModal').modal('show');
-	@endif
-});
+
 
 $( document ).ready(function() {
 	@if (count($errors) > 0)

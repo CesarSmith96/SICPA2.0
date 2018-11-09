@@ -61,7 +61,7 @@ class FamiliaController extends Controller {
 		$fam_id=$request->get('fam_id');
 		$familia = Familia::find($fam_id);
 
-		return $familia;
+		return view('familia.editar',['familia'=>$familia]);
 	}
 
 	public function postEditar(Request $request)

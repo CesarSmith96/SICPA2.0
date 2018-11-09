@@ -90,7 +90,7 @@ class ClienteController extends Controller {
 		$ent_id=$request->get('ent_id');
 		$entidad = Entidad::find($ent_id);
 
-		return $entidad;
+		return view('cliente.editar',['entidad'=>$entidad]);
 
 	}
 

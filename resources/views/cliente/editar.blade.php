@@ -123,16 +123,12 @@
 								<input type="text" class="form-control text-uppercase" name="ent_ctel" value="{{$entidad->ent_ctel}}">
 							</div>
 						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">Editar</button>
-								<a href="/validado/cliente" class="btn btn-danger" role="button">Cancelar</a>
-							</div>
-						</div>
-					</form>
-					
 				</div>
+				<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
+				<a href="/validado/cliente" class="btn bg-transparent text-white border-white border-2">Cancelar</a>
+				<button type="submit" class="btn btn-outline bg-white text-white border-white border-2">Editar<i class="icon-paperplane ml-2"></i></button>
+				</div>
+				</form>
 			</div>
 		</div>
 	</div>

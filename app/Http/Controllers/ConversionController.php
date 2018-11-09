@@ -76,7 +76,7 @@ class ConversionController extends Controller {
 		$conversion = Conversion::find($conv_id);
 		$unidadmedidas = UnidadMedida::all();
 
-		return $conversion;
+		return view('conversion.editar',['conversion'=>$conversion],['unidadmedidas'=>$unidadmedidas]);
 	}
 
 	public function postEditar(Request $request)

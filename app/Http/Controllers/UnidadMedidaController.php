@@ -66,7 +66,7 @@ class UnidadMedidaController extends Controller {
 		$unidadmedida = UnidadMedida::find($um_id);
 		$unidades = Unidad::all();
 
-		return $unidadmedida;
+		return view('unidadmedida.editar',['unidadmedida'=>$unidadmedida,'unidades'=> $unidades]);
 	}
 
 	public function postEditar(Request $request)

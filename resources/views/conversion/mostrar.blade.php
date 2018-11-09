@@ -13,6 +13,17 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
+	
+function printDiv(nombreDiv) {
+ var contenido= document.getElementById(nombreDiv).innerHTML;
+ var contenidoOriginal= document.body.innerHTML;
+
+ document.body.innerHTML = contenido;
+
+ window.print();
+
+ document.body.innerHTML = contenidoOriginal;
+}
 </script>
 <script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
 <script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
@@ -20,37 +31,10 @@
 
 $( document ).ready(function() {
 	@if (count($errors) > 0)
-    	$('#editarModal').modal('show');
-	@endif
-});
-
-$( document ).ready(function() {
-	@if (count($errors) > 0)
     	$('#crearModal').modal('show');
 	@endif
 });
 
-function setEditarModal(btn){
-    var conv_id = $(btn).attr( "conv_id" )
-
-    var request = $.ajax({
-        url: '/validado/conversion/editar',
-        type: 'GET',
-        data: { conv_id: conv_id} ,
-        contentType: 'application/json; charset=utf-8'
-    });
-
-    request.done(function(data) {
-        $('#conv_id_editar').val(data.conv_id);
-        $('#conv_fact_editar').val(data.conv_fact);
-
-    });
-
-    request.fail(function(jqXHR, textStatus) {
-          alert(textStatus);
-    });
-
-}
 
 </script>
 
@@ -115,63 +99,6 @@ function setEditarModal(btn){
 	</div>
 </div>
 
-<div class="modal fade" id="editarModal" tabindex="-1">
-    <div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header bg-success">
-				<h6 class="modal-title">Editar Unidad de Conversion</h6>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-            <div class="modal-body">
-            	@if (count($errors) > 0)
-					<div class="alert alert-danger">
-						<strong>Whoops!</strong> Al parecer algo está mal.<br><br>
-						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
-						</ul>
-					</div>
-				@endif
-                <form method="post" action="/validado/conversion/editar">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="conv_id" id="conv_id_editar">
-
-                    <div class="form-group">
-						<label for="recipient-name" class="form-control-label">Unidad de Medida 1</label>
-						<div>
-							<select name="um_id1" class="form-control">
-								@foreach ($unidadmedidas as $unidadmedida)
-								   <option  value='{{$unidadmedida->um_id}}'>{{$unidadmedida->um_desc}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-    				<div class="form-group">
-        				<label for="conv_fact" class="form-control-label">Factor de Conversión</label>
-        				<input type="text" class="form-control text-uppercase" id="conv_fact_editar"  name="conv_fact">
-    				</div>
-    				<div class="form-group">
-						<label for="recipient-name" class="form-control-label">Unidad de Medida 2</label>
-						<div>
-							<select name="um_id2" class="form-control">
-								@foreach ($unidadmedidas as $unidadmedida)
-								   <option  value='{{$unidadmedida->um_id}}'>{{$unidadmedida->um_desc}}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn bg-success">Guardar Cambios</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 @if (Session::has('error'))
 	<div class="alert alert-danger">
 		<strong>{{Session::get('error')}}</strong>
@@ -213,7 +140,7 @@ function setEditarModal(btn){
 	                	</div>
 	            	</div>
 				</div>
-				<div class="card-body">
+				<div class="card-body" id="areaImprimir">
 					<table class="table table-bordered table-hover datatable-basic table-xs">
 						<thead>
 							<tr>
@@ -235,7 +162,7 @@ function setEditarModal(btn){
 								<td class="text-center">
 									<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
 									<div class='dropdown-menu dropdown-menu-right'>
-										<a href="#" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editarModal" conv_id="{{$conversion->conv_id}}" onclick="setEditarModal(this)"><i class="icon-reset"></i>Editar</a>
+										<a href="/validado/conversion/editar?conv_id={{$conversion->conv_id}}" class="btn btn-primary dropdown-item"><i class="icon-reset"></i>Editar</a>
 										<a href="/validado/conversion/eliminar?conv_id={{$conversion->conv_id}}" onclick="
 										return confirm('Esta seguro que desea eliminar?')"
 		    							class="btn btn-danger dropdown-item"><i class="icon-cancel-square2"></i>Eliminar</a>

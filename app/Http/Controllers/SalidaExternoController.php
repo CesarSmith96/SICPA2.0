@@ -46,7 +46,7 @@ class SalidaExternoController extends Controller {
 	{
 		// tope_id=4 es tipo salida externo
 
-		$ieexternos = IEExterno::join('t_operacion','t_operacion.ie_id','=','t_ieexterno.ie_id')->select('t_ieexterno.*')->where('t_operacion.tope_id','=','4')->where('t_ieexterno.ie_id','<>','1')->paginate(20);
+		$ieexternos = IEExterno::join('t_operacion','t_operacion.ie_id','=','t_ieexterno.ie_id')->select('t_ieexterno.*')->where('t_operacion.tope_id','=','4')->where('t_ieexterno.ie_id','<>','1')->get();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->where('vend_tipo','=','FUNCIONARIO')->get();
 		$tipoccs = TipoCC::orderBy('tcc_desc','asc')->get();
 		$tipogastos = TipoGasto::orderBy('tgasto_desc','asc')->get();

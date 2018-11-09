@@ -100,7 +100,6 @@
 						<a href="/validado/npedido" class="dropdown-item"><i class="icon-chrome"></i> Nota de Pedido</a>
 						<a href="/validado/ndebito" class="dropdown-item"><i class="icon-chrome"></i> Nota de Debito</a>
 						<a href="/validado/salidaexterno" class="dropdown-item"><i class="icon-chrome"></i> Gastos</a>
-						<a href="/validado/notacredito" class="dropdown-item"><i class="icon-chrome"></i> Notas de Credito</a>
 						<a href="/validado/caja" class="dropdown-item"><i class="icon-chrome"></i> Caja</a>
 					</div>
 				</li>

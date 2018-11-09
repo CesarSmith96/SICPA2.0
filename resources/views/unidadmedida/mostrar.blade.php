@@ -18,11 +18,6 @@
 <script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
 @endsection
 <script type="text/javascript">
-$( document ).ready(function() {
-	@if (count($errors) > 0)
-    	$('#editarModal').modal('show');
-	@endif
-});
 
 $( document ).ready(function() {
 	@if (count($errors) > 0)
@@ -30,7 +25,7 @@ $( document ).ready(function() {
 	@endif
 });
 
-function setEditarModal(btn){
+/*function setEditarModal(btn){
     var um_id = $(btn).attr( "um_id" )
 
     var request = $.ajax({
@@ -51,7 +46,7 @@ function setEditarModal(btn){
           alert(textStatus);
     });
 
-}
+}*/
 
 </script>
 @section('content')
@@ -112,7 +107,7 @@ function setEditarModal(btn){
 	</div>
 </div>
 
-<div class="modal fade" id="editarModal" tabindex="-1">
+<!--<div class="modal fade" id="editarModal" tabindex="-1">
     <div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header bg-success">
@@ -161,7 +156,7 @@ function setEditarModal(btn){
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 @if (Session::has('creado'))
 	<div class="alert alert-success">
@@ -221,7 +216,9 @@ function setEditarModal(btn){
 								<td class="text-center">
 									<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
 									<div class='dropdown-menu dropdown-menu-right'>
-										<a hhref="#" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editarModal" um_id="{{$unidadmedida->um_id}}" onclick="setEditarModal(this)"><i class="icon-reset"></i>Editar</a>
+
+										<a href="/validado/unidadmedida/editar?um_id={{$unidadmedida->um_id}}" class="btn btn-primary dropdown-item"><i class="icon-reset"></i>Editar</a>
+
 										<a href="/validado/unidadmedida/eliminar?um_id={{$unidadmedida->um_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger dropdown-item"><i class="icon-cancel-square2"></i>Eliminar</a>
 									</div>
 								</td>

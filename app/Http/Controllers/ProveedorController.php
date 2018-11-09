@@ -72,7 +72,7 @@ class ProveedorController extends Controller {
 		$ent_id=$request->get('ent_id');
 		$entidad = Entidad::find($ent_id);
 
-		return $entidad;
+		return view('proveedor.editar',['entidad'=>$entidad]);
 
 	}
 

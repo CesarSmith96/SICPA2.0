@@ -72,6 +72,150 @@
 	</ul>
 
 	<div class="col-md-12 col-centered">
+			<div class="card border-success-400">
+			<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Búsqueda</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                	</div>
+	            	</div>
+				</div>
+			<div class="card-body border-success-400">
+
+				<form class="form-horizontal" role="form" method="POST" action="/validado/salida">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Nro</label>
+								<div>
+									<input type="text" class="form-control text-uppercase" name="comp_nro">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Cliente</label>
+								<div>
+									<section name="intro" id="intro" style="display: block;">
+										<select class="form-control" name="ent_id" id="ent_id">
+											<option  value='todos'>TODOS</option>
+											@foreach ($entidades as $entidad)
+											   <option  value='{{$entidad->ent_id}}'>{{$entidad->ent_rz}}</option>
+											@endforeach
+										</select>
+									</section>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Guía de Remisión</label>
+								<div>
+									<input type="text" class="form-control text-uppercase" name="comp_guia">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Tipo</label>
+								<div>
+									<select class="form-control text-uppercase" name="tcomp_id">
+										<option  value=0>Elija Tipo</option>
+									   @foreach ($tipocomprobantes as $tipocomprobante)
+									   		<option  value='{{$tipocomprobante->tcomp_id}}'>{{$tipocomprobante->tcomp_desc}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Fecha Inicio</label>
+								<div>
+									<input type="date" class="form-control text-uppercase" name="comp_fecha_ini">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Fecha Fin</label>
+								<div>
+									<input type="date" class="form-control text-uppercase" name="comp_fecha_fin">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Condición</label>
+								<div>
+									<select class="form-control text-uppercase" name="comp_cond">
+											<option  value=0>Elija Condición</option>
+											<option >AL CONTADO</option>
+											<option >MUESTRA GRATUITA</option>
+											<option >AL CREDITO</option>
+											<option >CANCELADO</option>
+											<option >ANULADO</option>
+											<option >Otro</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Moneda</label>
+								<div>
+									<select class="form-control text-uppercase" name="comp_moneda">
+										<option  value=0>Elija Moneda</option>
+									   <option value="DOLAR">DOLÁR AMERICANO</option>
+									   <option value="SOLES">SOLES</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Vendedor</label>
+								<div>
+									<select class="form-control text-uppercase" name="vend_id">
+										<option  value=0>Elija Vendedor</option>
+									   @foreach ($vendedores as $vendedor)
+									   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>IGV</label>
+								<div>
+									<input type="radio" name="igv" value="C">CON IGV</input>
+									<input type="radio" name="igv" value="S">SIN IGV</input>
+									<input type="radio" name="igv" value="A">AMBOS</input>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-offset-0">
+						</br>
+						<button type="submit" name="buscar" value="buscar" class="btn btn-default">
+							<img src="/images/buscar.png" title="BUSCAR">
+						</button>
+						<button type="submit" name="imprimir" value="imprimir" class="btn btn-default">
+							<img src="/images/imprimir.png" title="IMPRIMIR">
+						</button>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 col-centered">
 		<div class="card border-success-400">
 
 			<div class="card-header header-elements-inline bg-dark">

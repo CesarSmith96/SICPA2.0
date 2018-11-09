@@ -12,13 +12,8 @@
 </style>
 @endsection
 @section('javascript')
+<script type="text/javascript" src="{{asset('global_assets/js/sicpa/imprimirtablacliente.js')}}"></script>
 <script type="text/javascript">
-
-$( document ).ready(function() {
-	@if (count($errors) > 0)
-		$('#editarModal').modal('show');
-	@endif
-});
 
 $( document ).ready(function() {
 	@if (count($errors) > 0)
@@ -45,7 +40,7 @@ $(document).ready(function () {
   	});
 });
 
-function setEditarModal(btn){
+/*function setEditarModal(btn){
  	
 var ent_id = $(btn).attr( "ent_id" )
 
@@ -75,7 +70,7 @@ request.fail(function(jqXHR, textStatus) {
       alert(textStatus);
     });
 
-}
+}*/
 </script>
 
 <script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
@@ -195,7 +190,7 @@ request.fail(function(jqXHR, textStatus) {
 	</div>
 </div>
 
-<div class="modal fade" id="editarModal" tabindex="-1">
+<!--<div class="modal fade" id="editarModal" tabindex="-1">
     <div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header bg-success">
@@ -302,7 +297,7 @@ request.fail(function(jqXHR, textStatus) {
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 @if (Session::has('creado'))
 	<div class="alert alert-success">
@@ -339,9 +334,8 @@ request.fail(function(jqXHR, textStatus) {
 				</li>
 				<li>
 					<div data-fab-label="Imprimir">
-						<form class="form-inline" role="form" method="POST" action="/validado/cliente">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="imprimir" value="imprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+						
+						<button class="btn btn-light rounded-round btn-icon btn-float bg-teal-400" id="btnImprimir">
 							<i class="icon-printer2"></i> 
 						</button>
 						</form>
@@ -350,40 +344,6 @@ request.fail(function(jqXHR, textStatus) {
 			</ul>
 		</li>
 	</ul>
-	<!--<ul class="fab-menu fab-menu-absolute fab-menu-top-right" data-fab-toggle="hover" id="fab-menu-affixed-demo-right">
-		<li>
-			<a class="fab-menu-btn btn bg-pink-300 btn-float rounded-round btn-icon">
-				<i class="fab-icon-open icon-grid3"></i>
-				<i class="fab-icon-close icon-cross2"></i>
-			</a>
-
-			<ul class="fab-menu-inner">
-				<li>
-					<div data-fab-label="Compose email">
-						<a href="#" class="btn btn-light rounded-round btn-icon btn-float">
-							<i class="icon-pencil"></i>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div data-fab-label="Conversations">
-						<a href="#" class="btn btn-light rounded-round btn-icon btn-float">
-							<i class="icon-bubbles3"></i>
-						</a>
-						<span class="badge bg-primary-400">5</span>
-					</div>
-				</li>
-				<li>
-					<div data-fab-label="Chat with Jack">
-						<a href="#" class="btn bg-pink-400 rounded-round btn-icon btn-float">
-							<img src="../../../../global_assets/images/demo/users/face23.jpg" class="img-fluid rounded-circle" alt="">
-						</a>
-						<span class="badge badge-mark border-pink-400"></span>
-					</div>
-				</li>
-			</ul>
-		</li>
-	</ul>-->
 	<div class="row">
 		<div class="col-md-12 col-centered">
 			<div class="card border-success-400">
@@ -396,7 +356,7 @@ request.fail(function(jqXHR, textStatus) {
 	            	</div>
 				</div>
 				<div class="card-body">
-					<table class="table table-bordered table-hover datatable-basic table-xs">
+					<table class="table table-bordered table-hover datatable-basic table-xs" id="tablaImprimir">
 						<thead>
 						<tr>
 							<th>RUC ó DNI</th>
@@ -426,7 +386,7 @@ request.fail(function(jqXHR, textStatus) {
 								<td class="text-center">
 									<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
 									<div class='dropdown-menu dropdown-menu-right'>
-										<a href="#" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#editarModal" ent_id="{{$entidad->ent_id}}" onclick="setEditarModal(this)"><i class="icon-reset"></i>Editar</a>
+										<a href="/validado/cliente/editar?ent_id={{$entidad->ent_id}}" class="btn btn-primary dropdown-item"><i class="icon-reset"></i>Editar</a>
 										<a href="/validado/cliente/eliminar?ent_id={{$entidad->ent_id}}" onclick="return confirm('Esta seguro que desea eliminar?')" class="btn btn-danger dropdown-item"><i class="icon-cancel-square2"></i>Eliminar</a>
 									</div>
 								</td>
@@ -440,6 +400,9 @@ request.fail(function(jqXHR, textStatus) {
 					@endif
 
 					</table>
+					<div id="divNuevaTabla" hidden="hidden">
+						
+					</div>
 				</div>
 			</div>
 		</div>

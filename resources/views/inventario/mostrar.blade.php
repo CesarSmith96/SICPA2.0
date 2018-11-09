@@ -35,6 +35,7 @@ function getUp(sel)
 </script>
 <script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
 <script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('global_assets/js/sicpa/imprimirtablainventario.js')}}"></script>
 @endsection
 
 @section('content')
@@ -130,9 +131,8 @@ function getUp(sel)
 				</li>
 				<li>
 					<div data-fab-label="Imprimir">
-						<form class="form-inline" role="form" method="POST" action="/validado/inventario">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="imprimirinv" value="imprimirinv" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
+						
+						<button class="btn btn-light rounded-round btn-icon btn-float bg-teal-400" id="btnImprimir">
 							<i class="icon-printer2"></i> 
 						</button>
 						</form>
@@ -142,6 +142,66 @@ function getUp(sel)
 		</li>
 	</ul>
 	<div class="row">
+		<!--<div class="col-md-9 col-centered">
+			<div class="card border-success-400">
+				<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Búsqueda</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                	</div>
+	            	</div>
+				</div>
+				<div class="card-body border-success-400">
+						<form class="form-horizontal" role="form" method="POST" action="/validado/inventario">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Producto</label>
+										<div>
+											<input type="text" class="form-control text-uppercase" name="prod_desc">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Stock minimo</label>
+										<div>
+											<input type="number" class="form-control text-uppercase" name="cant_min">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Stock maximo</label>
+										<div>
+											<input type="number" class="form-control text-uppercase" name="cant_max">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<div>
+											<button type="submit" class="btn btn-dark">
+												Buscar
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" name="imprimirinv" value="imprimir" class="btn btn-default">
+										<img src="/images/imprimir.png" title="IMPRIMIR">
+									</button>
+								</div>
+							</div>
+						</form>
+				</div>
+			</div>
+		</div>-->
+
 		<div class="col-md-9 col-centered">
 			<div class="card border-success-400">
 
@@ -156,7 +216,7 @@ function getUp(sel)
 				</div>
 				<a href="/validado/inventario/actualizar" class="btn btn-success" role="button">Actualizar</a>
 				<div class="card-body">
-					<table class="table table-bordered table-hover datatable-basic table-xs">
+					<table class="table table-bordered table-hover datatable-basic table-xs" id="tablaImprimir">
 						<thead>
 							<tr>
 								<th>Producto</th>
@@ -192,6 +252,9 @@ function getUp(sel)
 					@endif
 
 					</table>
+					<div id="divNuevaTabla" hidden="hidden">
+						
+					</div>
 				</div>
 			</div>
 		</div>

@@ -66,13 +66,129 @@
 	</ul>
 
 	<div class="col-md-12 col-centered">
+			<div class="card border-success-400">
+
+				<div class="card-header header-elements-inline bg-dark">
+					<h6 class="card-title">Búsqueda</h6>
+					<div class="header-elements">
+						<div class="list-icons">
+	                		<a class="list-icons-item" data-action="collapse"></a>
+	                	</div>
+	            	</div>
+				</div>
+				<div class="card-body border-success-400">
+				<form class="form-horizontal" role="form" method="POST" action="/validado/salidaexterno">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Nro</label>
+								<div>
+									<input type="text" class="form-control text-uppercase" name="ie_comp">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>RUC</label>
+								<div>
+									<input type="text" class="form-control text-uppercase" name="ie_ruc">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Razón Social</label>
+								<div>
+									<input type="text" class="form-control text-uppercase" name="ie_rz">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Guía de Remisión</label>
+								<div>
+									<input type="text" class="form-control text-uppercase" name="ie_guia">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Tipo</label>
+								<div>
+									<select class="form-control text-uppercase" name="ie_tcomp">
+										<option  value=0>Elija Tipo</option>
+										<option>BOLETA</option>
+									   	<option>FACTURA</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Fecha Inicio</label>
+								<div>
+									<input type="date" class="form-control text-uppercase" name="ie_fecha_ini">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Fecha Fin</label>
+								<div>
+									<input type="date" class="form-control text-uppercase" name="ie_fecha_fin">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Moneda</label>
+								<div>
+									<select class="form-control text-uppercase" name="ie_moneda">
+										<option  value=0>Elija Moneda</option>
+									  	<option value="DOLAR">DOLÁR AMERICANO</option>
+										<option value="SOLES">SOLES</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Vendedor</label>
+								<div>
+									<select class="form-control text-uppercase" name="vend_id">
+										<option  value=0>Elija Funcionario</option>
+									   @foreach ($vendedores as $vendedor)
+									   		<option  value='{{$vendedor->vend_id}}'>{{$vendedor->vend_nom}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-offset-0">
+						<button type="submit" name="buscar" value="buscar" class="btn btn-default">
+							<img src="/images/buscar.png" title="BUSCAR">
+						</button>
+						<button type="submit" name="imprimir" value="imprimir" class="btn btn-default">
+							<img src="/images/imprimir.png" title="IMPRIMIR">
+						</button>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 col-centered">
 		<div class="card border-success-400">
 			<div class="card-header header-elements-inline bg-dark">
 					<h6 class="card-title">Gasto</h6>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
-	                		<a class="list-icons-item" data-action="remove"></a>
 	                	</div>
 	            	</div>
 				</div>
@@ -92,7 +208,8 @@
 							<th>Moneda</th>
 							<th>T. Cambio</th>
 							<th>Funcionario</th>
-							<th>T. Gasto</th>	
+							<th>T. Gasto</th>
+							<th>T. C. Costo</th>	
 							<th>Acciones</th>	
 						</tr>
 					</thead>
@@ -115,12 +232,13 @@
 							<td>{{$ieexterno->ie_tipcambio}}</td>
 							<td>{{$ieexterno->vendedor->vend_nom}}</td>
 							<td>{{$ieexterno->ie_tipgasto}}</td>
+							<td>{{$ieexterno->ie_tipocc}}</td>
 							<td class="text-center">
 								<a href='#' class='text-default dropdown-toggle' data-toggle='dropdown'><i class='icon-menu7'></i></a>
 								<div class='dropdown-menu dropdown-menu-right'>
-									<a href="/validado/detallesalidaexterno?ie_id={{$ieexterno->ie_id}}"><img src="/images/detalle.png"  title="VER DETALLE"></a>
-									<a href="/validado/salidaexterno/editar?ie_id={{$ieexterno->ie_id}}"><img src="/images/editar.png" title="EDITAR"></a>
-									<a href="/validado/salidaexterno/eliminar?ie_id={{$ieexterno->ie_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR"></a>
+									<a class="btn btn-primary dropdown-item" href="/validado/detallesalidaexterno?ie_id={{$ieexterno->ie_id}}"><img src="/images/detalle.png"  title="VER DETALLE">VER DETALLE</a>
+									<a class="btn btn-primary dropdown-item" href="/validado/salidaexterno/editar?ie_id={{$ieexterno->ie_id}}"><img src="/images/editar.png" title="EDITAR">EDITAR</a>
+									<a class="btn btn-primary dropdown-item" href="/validado/salidaexterno/eliminar?ie_id={{$ieexterno->ie_id}}" onclick="return confirm('Esta seguro que desea eliminar?')"><img src="/images/eliminar.png" title="ELIMINAR">ELIMINAR</a>
 								</div>
 							</td>
 						</tr>
@@ -138,5 +256,5 @@
 		</div>
 	</div>
 </div>
-<?php echo $ieexternos->render(); ?>
+
 @endsection

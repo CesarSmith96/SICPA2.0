@@ -75,7 +75,7 @@ class CategoriaController extends Controller {
 		$familias =Familia::orderBy('fam_desc','asc')->get();
 
 
-		return $categoria;
+		return view('categoria.editar',['categoria'=>$categoria,'familias'=>$familias]);
 	}
 
 	public function postEditar(Request $request)
