@@ -7,6 +7,7 @@ use SICPA\UnidadMedida;
 use SICPA\UnidadProducto;
 use SICPA\Inventario;
 use SICPA\Conversion;
+use SICPA\Pago;
 use Illuminate\Http\Request;
 use SICPA\Http\Requests\CrearDetalleComprobanteRequest;
 use SICPA\Http\Requests\EditarDetalleComprobanteRequest;
@@ -180,6 +181,9 @@ class DetalleIngresoController extends Controller {
 			$comprobante->comp_subt=$totalsigv+$subtigv;
 			$comprobante->comp_igv=$totalcigv-$subtigv;
 			$comprobante->comp_tot=$preciotot;
+
+			$tot_pago = Pago::where('comp_id',$comp_id)->sum('pago_monto');
+			$comprobante->comp_saldo=$preciotot-$tot_pago;
 			$comprobante->save();
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 

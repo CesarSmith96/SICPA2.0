@@ -17,7 +17,6 @@
 <script src="{{asset('global_assets/js/plugins/cliente/datatable_cliente.js')}}"></script>
 <script src="{{asset('global_assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
 @endsection
-
 @section('content')
 @if (Session::has('error'))
 	<div class="alert alert-danger">
