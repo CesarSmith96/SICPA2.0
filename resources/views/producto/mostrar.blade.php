@@ -106,7 +106,7 @@ function getCodigo()
 							<div class="form-group">
 								<label class="control-label">Código</label>
 								<div>
-									<input type="number" class="form-control text-uppercase" name="prod_cod" id="prod_cod" value="-">
+									<input type="text" readonly="" class="form-control text-uppercase" name="prod_cod" id="prod_cod" value="-">
 								</div>
 							</div>
 						</div>
