@@ -348,7 +348,7 @@ class IngresoController extends Controller {
 		if($request->get('cambio')=="SI")
 		{
 		
-			$comprobante->pagos()->delete();
+			$comprobante->pagoproveedores()->delete();
 			
 			$nro_filas = strtoupper($request->get('nro_filas'));
 			

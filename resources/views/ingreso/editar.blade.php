@@ -70,7 +70,9 @@
         });
  
         /**
-         * Funcion para eliminar la ultima columna de la tabla.
+         * Funcion para eliminar la ult
+
+         ima columna de la tabla.
          * Si unicamente queda una columna, esta no sera eliminada
          */
         $("#del").click(function(){
@@ -335,7 +337,7 @@
 				            </div>
 				        </div>
 
-						
+						@if($comprobante->comp_cond=='AL CREDITO')
 						<div class="col-md-12 col-centered">
 							<div class="card border-success-400">
 								<div class="card-body border-success-400"><strong>HISTORIAL DE PAGOS </strong></br><strong>  -Monto Actual: </strong><div style="display:inline; float:right;">{{$comprobante->comp_tot}}</div></br><strong>  -Saldo Actual: </strong><div style="display:inline; float:right;">{{$comprobante->comp_saldo}}</div></div>
@@ -418,7 +420,7 @@
 								</div>
 							</div>
 						</div>
-					
+						@endif	
 				</div>
 
 				<div class="card-footer d-flex justify-content-between align-items-center bg-dark border-top-0">
