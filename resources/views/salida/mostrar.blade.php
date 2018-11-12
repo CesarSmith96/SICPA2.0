@@ -57,16 +57,6 @@
 						</a>
 					</div>
 				</li>
-				<li>
-					<div data-fab-label="Exportar">
-						<form class="form-inline" role="form" method="POST" action="/validado/salida">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="exportarxls" value="imprimir" class="btn btn-light rounded-round btn-icon btn-float bg-teal-400">
-							<i class="icon-printer2"></i> 
-						</button>
-						</form>
-					</div>
-				</li>
 			</ul>
 		</li>
 	</ul>
@@ -74,7 +64,7 @@
 	<div class="col-md-12 col-centered">
 			<div class="card border-success-400">
 			<div class="card-header header-elements-inline bg-dark">
-					<h6 class="card-title">Búsqueda</h6>
+					<h4 class="card-title">Búsqueda</h4>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
@@ -219,11 +209,10 @@
 		<div class="card border-success-400">
 
 			<div class="card-header header-elements-inline bg-dark">
-					<h6 class="card-title">Ventas</h6>
+					<h4 class="card-title">Ventas</h4>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
-	                		<a class="list-icons-item" data-action="remove"></a>
 	                	</div>
 	            	</div>
 				</div>

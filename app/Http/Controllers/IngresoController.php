@@ -117,8 +117,7 @@ class IngresoController extends Controller {
 		$tipocomprobantes = TipoComprobante::all();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->where('vend_tipo','=','VENDEDOR')->get();
 
-		if(Input::get('exportarxls'))
-			$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','1')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->get();
+		if(Input::get('imprimir'))
 			return view('reporte.ingreso',['comprobantes'=> $comprobantes,'tipocomprobantes'=> $tipocomprobantes,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 		return view('ingreso.mostrar',['comprobantes'=> $comprobantes,'tipocomprobantes'=> $tipocomprobantes,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 		

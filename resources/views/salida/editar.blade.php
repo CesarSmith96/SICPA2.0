@@ -133,7 +133,7 @@
 </script>
 @endsection
 @section('content')
-<div class="container-fluid">
+<div class="content">
 	<div class="row">
 		<div class="col-md-11 col-centered">
 			<div class="card border-success-400">

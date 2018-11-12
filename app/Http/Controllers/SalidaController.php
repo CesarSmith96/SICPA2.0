@@ -111,11 +111,9 @@ class SalidaController extends Controller {
 		$tipocomprobantes = TipoComprobante::all();
 		$vendedores = Vendedor::orderBy('vend_nom','asc')->where('vend_tipo','=','VENDEDOR')->get();
 
-		if(Input::get('exportarxls'))
-			$comprobantes = Comprobante::join('t_operacion','t_operacion.comp_id','=','t_comprobante.comp_id')->select('t_comprobante.*')->where('t_operacion.tope_id','=','2')->where('t_comprobante.comp_id','<>','1')->orderBy('comp_fecha','desc')->orderBy('comp_nro','desc')->limit(80)->get();
-		$vendedores = Vendedor::orderBy('vend_nom','asc')->where('vend_tipo','=','VENDEDOR')->get();
-		$entidades = Entidad::where('tent_id','1')->where('ent_id','<>','1')->orderBy('ent_rz','asc')->get();
+		if(Input::get('imprimir'))
 			return view('reporte.salidaexcel',['comprobantes'=> $comprobantes,'tipocomprobantes'=> $tipocomprobantes,'entidades'=> $entidades,'vendedores'=> $vendedores]);
+		
 		return view('salida.mostrar',['comprobantes'=> $comprobantes,'tipocomprobantes'=> $tipocomprobantes,'entidades'=> $entidades,'vendedores'=> $vendedores]);
 	}
 

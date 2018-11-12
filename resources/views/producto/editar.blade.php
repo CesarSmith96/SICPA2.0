@@ -53,7 +53,7 @@
 								<div class="form-group">
 									<label class="control-label">Código</label>
 									<div>
-										<input type="text" class="form-control text-uppercase" name="prod_cod" value="{{$producto->prod_cod}}">
+										<input readonly="" type="text" class="form-control text-uppercase" name="prod_cod" value="{{$producto->prod_cod}}">
 									</div>
 								</div>
 							</div>
