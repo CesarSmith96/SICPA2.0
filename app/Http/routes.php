@@ -56,13 +56,19 @@ Route::get('/information/create/ajax-state-cat',function()
 
     if(Producto::join('t_categoria','t_categoria.cat_id','=','t_producto.cat_id')->where('t_categoria.fam_id',$fam_id)->count()==0)
     {
-    	$codigo_fam = 100 + $fam_id;
-    	$codigo_prod = $codigo_fam.'0001';
+        $codigo_fam = 100 + $fam_id;
+    	$codigo_prod = $codigo_fam.'1001';
     }
     else
     {
-	    $cod_prod = Producto::join('t_categoria','t_categoria.cat_id','=','t_producto.cat_id')->select('t_producto.prod_cod')->where('t_categoria.fam_id',$fam_id)->max('prod_cod');
-    	$codigo_prod = $cod_prod + 1;    	
+        $cod_prod = Producto::join('t_categoria','t_categoria.cat_id','=','t_producto.cat_id')->select('t_producto.prod_cod')->where('t_categoria.fam_id',$fam_id)->max('prod_cod');
+        $codigo_prod = $cod_prod;
+        $izquierda = substr($codigo_prod,0,3);
+        $derecha = 0;
+        $derecha = substr($codigo_prod,4,3) + 1001;
+        $nuevo_codigo = $izquierda.$derecha;
+        return $nuevo_codigo;
+        
     }
 
     return $codigo_prod;
